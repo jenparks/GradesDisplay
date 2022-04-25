@@ -18,6 +18,7 @@ import edu.westga.cs6312.grades.model.Grades;
  *
  */
 public class GradesGUI {
+	private Grades maxGrades;
 	private Grades studentGrades;
 	private GradesPane userPane;
 
@@ -25,6 +26,7 @@ public class GradesGUI {
 	 * Constructor that gets data read from file & creates PieGraph
 	 */
 	public GradesGUI() {
+		this.maxGrades = new Grades();
 		this.studentGrades = new Grades();
 		this.readData();
 		this.createGradesPane();
@@ -41,44 +43,53 @@ public class GradesGUI {
 
 	/**
 	 * Helper method - reads in a file
-	 * 
-	 * NOTE: this version removes first line which gives full points values
 	 */
 	private void readData() {
 		try {
 			Scanner dataFromFile = new Scanner(new File("data.txt"));
 			String nextWholeLine = dataFromFile.nextLine();
-			while (dataFromFile.hasNextLine()) {
-				nextWholeLine = dataFromFile.nextLine();
-				Scanner nextInputLine = new Scanner(nextWholeLine);
-				nextInputLine.useDelimiter(",");
-				String id = nextInputLine.next();
-				this.studentGrades.setStudentID(id);
-				String firstname = nextInputLine.next();
-				this.studentGrades.setFirstName(firstname);
-				String lastname = nextInputLine.next();
-				this.studentGrades.setLastName(lastname);
-				while (nextInputLine.hasNextInt()) {
-					int grade = nextInputLine.nextInt();
-					this.studentGrades.setGradesLab(grade);
-				}
-				String gap1 = nextInputLine.next();
-				System.out.println(gap1);
-				while (nextInputLine.hasNextInt()) {
-					int grade = nextInputLine.nextInt();
-					this.studentGrades.setGradesProject(grade);
-				}
-				String gap2 = nextInputLine.next();
-				System.out.println(gap2);
-				while (nextInputLine.hasNextInt()) {
-					int grade = nextInputLine.nextInt();
-					this.studentGrades.setGradesProject(grade);
-				}
-				nextInputLine.close();
-			}
+			this.maxGrades = this.readEachUserGrades(nextWholeLine);
+			nextWholeLine = dataFromFile.nextLine();
+			this.studentGrades = this.readEachUserGrades(nextWholeLine);
 		} catch (FileNotFoundException ex) {
 			System.out.println("Error with file, try again");
 		}
+	}
+
+	/**
+	 * Helper method - reads each line and returns a Grades object
+	 * 
+	 * @param nextWholeLine Next line to be parsed into Grades
+	 * @return Grades object with grades added
+	 */
+	private Grades readEachUserGrades(String nextWholeLine) {
+		Grades dataEntryGrades = new Grades();
+
+		Scanner nextInputLine = new Scanner(nextWholeLine);
+		nextInputLine.useDelimiter(",");
+
+		String id = nextInputLine.next();
+		dataEntryGrades.setStudentID(id);
+		String firstname = nextInputLine.next();
+		dataEntryGrades.setFirstName(firstname);
+		String lastname = nextInputLine.next();
+		dataEntryGrades.setLastName(lastname);
+		while (nextInputLine.hasNextInt()) {
+			int grade = nextInputLine.nextInt();
+			dataEntryGrades.setGradesLab(grade);
+		}
+		String gap1 = nextInputLine.next();
+		while (nextInputLine.hasNextInt()) {
+			int grade = nextInputLine.nextInt();
+			dataEntryGrades.setGradesProject(grade);
+		}
+		String gap2 = nextInputLine.next();
+		while (nextInputLine.hasNextInt()) {
+			int grade = nextInputLine.nextInt();
+			dataEntryGrades.setGradesProject(grade);
+		}
+		nextInputLine.close();
+		return dataEntryGrades;
 	}
 
 	/**
