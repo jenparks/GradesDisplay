@@ -54,7 +54,7 @@ public class GradebookWhenCreateGradebook {
 	@Test
 	public void testCreateGradebookGetAverageLab() {
 		Gradebook testGradebook = new Gradebook();
-		
+
 		Grades addGradesPotential = new Grades();
 		addGradesPotential.setGradesLab(100);
 		addGradesPotential.setGradesLab(100);
@@ -63,7 +63,7 @@ public class GradebookWhenCreateGradebook {
 		addGradesStudent.setGradesLab(90);
 		addGradesStudent.setGradesLab(80);
 		testGradebook.addToGradebook(addGradesStudent);
-		
+
 		ArrayList<Double> result = testGradebook.getAverageGradesLab();
 		ArrayList<Double> expected = new ArrayList<Double>();
 		expected.add(85.0);
@@ -76,7 +76,7 @@ public class GradebookWhenCreateGradebook {
 	@Test
 	public void testCreateGradebookGetAverageProject() {
 		Gradebook testGradebook = new Gradebook();
-		
+
 		Grades addGradesPotential = new Grades();
 		addGradesPotential.setGradesProject(100);
 		addGradesPotential.setGradesProject(100);
@@ -85,7 +85,7 @@ public class GradebookWhenCreateGradebook {
 		addGradesStudent.setGradesProject(70);
 		addGradesStudent.setGradesProject(90);
 		testGradebook.addToGradebook(addGradesStudent);
-		
+
 		ArrayList<Double> result = testGradebook.getAverageGradesProject();
 		ArrayList<Double> expected = new ArrayList<Double>();
 		expected.add(80.0);
@@ -98,7 +98,7 @@ public class GradebookWhenCreateGradebook {
 	@Test
 	public void testCreateGradebookGetAverageTest() {
 		Gradebook testGradebook = new Gradebook();
-		
+
 		Grades addGradesPotential = new Grades();
 		addGradesPotential.setGradesTest(100);
 		addGradesPotential.setGradesTest(100);
@@ -107,10 +107,38 @@ public class GradebookWhenCreateGradebook {
 		addGradesStudent.setGradesTest(50);
 		addGradesStudent.setGradesTest(90);
 		testGradebook.addToGradebook(addGradesStudent);
-		
+
 		ArrayList<Double> result = testGradebook.getAverageGradesTest();
 		ArrayList<Double> expected = new ArrayList<Double>();
 		expected.add(70.0);
+		assertEquals(expected, result);
+	}
+
+	/**
+	 * Tests creating Gradebook object, calculate overall average straight
+	 */
+	@Test
+	public void testCreateGradebookGetStraightAverage() {
+		Gradebook testGradebook = new Gradebook();
+
+		Grades addGradesPotential = new Grades();
+		addGradesPotential.setGradesLab(100);
+		addGradesPotential.setGradesLab(100);
+		addGradesPotential.setGradesProject(100);
+		addGradesPotential.setGradesProject(100);
+		addGradesPotential.setGradesTest(100);
+		testGradebook.addToPotentialPoints(addGradesPotential);
+		Grades addGradesStudent = new Grades();
+		addGradesStudent.setGradesLab(90);
+		addGradesStudent.setGradesLab(80);
+		addGradesStudent.setGradesProject(70);
+		addGradesStudent.setGradesProject(90);
+		addGradesStudent.setGradesTest(50);
+		testGradebook.addToGradebook(addGradesStudent);
+
+		ArrayList<Double> result = testGradebook.getAverageOverallStraight();
+		ArrayList<Double> expected = new ArrayList<Double>();
+		expected.add(76.0);
 		assertEquals(expected, result);
 	}
 

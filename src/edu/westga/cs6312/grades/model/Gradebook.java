@@ -112,4 +112,22 @@ public class Gradebook {
 		}
 		return testAverages;
 	}
+
+	/**
+	 * Calculates overall grade for each student in Gradebook - uses straight
+	 * average
+	 * 
+	 * @return ArrayList of all overall average grades (by student)
+	 */
+	public ArrayList<Double> getAverageOverallStraight() {
+		ArrayList<Double> finalAverages = new ArrayList<Double>();
+		for (Grades element : this.studentGradebook) {
+			int sumStudentGrades = element.sumGradesLab() + element.sumGradesProject() + element.sumGradesTest();
+			int sumPotentialPoints = this.potentialPoints.sumGradesLab() + this.potentialPoints.sumGradesProject()
+					+ this.potentialPoints.sumGradesTest();
+			double average = ((double) sumStudentGrades / sumPotentialPoints) * 100;
+			finalAverages.add(average);
+		}
+		return finalAverages;
+	}
 }
