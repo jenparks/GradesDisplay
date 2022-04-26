@@ -79,7 +79,7 @@ public class Gradebook {
 	public ArrayList<Double> getAverageGradesLab() {
 		ArrayList<Double> labAverages = new ArrayList<Double>();
 		for (Grades element : this.studentGradebook) {
-			double average = ((double) element.sumGradesLab() / this.potentialPoints.sumGradesLab()) * 100;
+			double average = (element.sumGradesLab() / this.potentialPoints.sumGradesLab()) * 100;
 			labAverages.add(average);
 		}
 		return labAverages;
@@ -93,7 +93,7 @@ public class Gradebook {
 	public ArrayList<Double> getAverageGradesProject() {
 		ArrayList<Double> projectAverages = new ArrayList<Double>();
 		for (Grades element : this.studentGradebook) {
-			double average = ((double) element.sumGradesProject() / this.potentialPoints.sumGradesProject()) * 100;
+			double average = (element.sumGradesProject() / this.potentialPoints.sumGradesProject()) * 100;
 			projectAverages.add(average);
 		}
 		return projectAverages;
@@ -107,7 +107,7 @@ public class Gradebook {
 	public ArrayList<Double> getAverageGradesTest() {
 		ArrayList<Double> testAverages = new ArrayList<Double>();
 		for (Grades element : this.studentGradebook) {
-			double average = ((double) element.sumGradesTest() / this.potentialPoints.sumGradesTest()) * 100;
+			double average = (element.sumGradesTest() / this.potentialPoints.sumGradesTest()) * 100;
 			testAverages.add(average);
 		}
 		return testAverages;
@@ -122,10 +122,10 @@ public class Gradebook {
 	public ArrayList<Double> getAverageOverallStraight() {
 		ArrayList<Double> finalAverages = new ArrayList<Double>();
 		for (Grades element : this.studentGradebook) {
-			int sumStudentGrades = element.sumGradesLab() + element.sumGradesProject() + element.sumGradesTest();
-			int sumPotentialPoints = this.potentialPoints.sumGradesLab() + this.potentialPoints.sumGradesProject()
+			double sumStudentGrades = element.sumGradesLab() + element.sumGradesProject() + element.sumGradesTest();
+			double sumPotentialPoints = this.potentialPoints.sumGradesLab() + this.potentialPoints.sumGradesProject()
 					+ this.potentialPoints.sumGradesTest();
-			double average = ((double) sumStudentGrades / sumPotentialPoints) * 100;
+			double average = (sumStudentGrades / sumPotentialPoints) * 100;
 			finalAverages.add(average);
 		}
 		return finalAverages;

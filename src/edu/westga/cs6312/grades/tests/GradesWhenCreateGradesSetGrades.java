@@ -28,9 +28,9 @@ public class GradesWhenCreateGradesSetGrades {
 	public void testCreateGradesGetLabGrades1Added() {
 		Grades testGrades = new Grades();
 		testGrades.setGradesLab(50);
-		ArrayList<Integer> result = testGrades.getGradesLab();
-		ArrayList<Integer> expected = new ArrayList<Integer>();
-		expected.add(50);
+		ArrayList<Double> result = testGrades.getGradesLab();
+		ArrayList<Double> expected = new ArrayList<Double>();
+		expected.add(50.0);
 		assertEquals(expected, result);
 	}
 
@@ -42,10 +42,10 @@ public class GradesWhenCreateGradesSetGrades {
 		Grades testGrades = new Grades();
 		testGrades.setGradesLab(50);
 		testGrades.setGradesLab(70);
-		ArrayList<Integer> result = testGrades.getGradesLab();
-		ArrayList<Integer> expected = new ArrayList<Integer>();
-		expected.add(50);
-		expected.add(70);
+		ArrayList<Double> result = testGrades.getGradesLab();
+		ArrayList<Double> expected = new ArrayList<Double>();
+		expected.add(50.0);
+		expected.add(70.0);
 		assertEquals(expected, result);
 	}
 
@@ -56,9 +56,9 @@ public class GradesWhenCreateGradesSetGrades {
 	public void testCreateGradesGetProjectGrades1Added() {
 		Grades testGrades = new Grades();
 		testGrades.setGradesProject(20);
-		ArrayList<Integer> result = testGrades.getGradesProject();
-		ArrayList<Integer> expected = new ArrayList<Integer>();
-		expected.add(20);
+		ArrayList<Double> result = testGrades.getGradesProject();
+		ArrayList<Double> expected = new ArrayList<Double>();
+		expected.add(20.0);
 		assertEquals(expected, result);
 	}
 
@@ -70,10 +70,10 @@ public class GradesWhenCreateGradesSetGrades {
 		Grades testGrades = new Grades();
 		testGrades.setGradesProject(20);
 		testGrades.setGradesProject(75);
-		ArrayList<Integer> result = testGrades.getGradesProject();
-		ArrayList<Integer> expected = new ArrayList<Integer>();
-		expected.add(20);
-		expected.add(75);
+		ArrayList<Double> result = testGrades.getGradesProject();
+		ArrayList<Double> expected = new ArrayList<Double>();
+		expected.add(20.0);
+		expected.add(75.0);
 		assertEquals(expected, result);
 	}
 
@@ -84,9 +84,9 @@ public class GradesWhenCreateGradesSetGrades {
 	public void testCreateGradesGetTestGrades1Added() {
 		Grades testGrades = new Grades();
 		testGrades.setGradesTest(33);
-		ArrayList<Integer> result = testGrades.getGradesTest();
-		ArrayList<Integer> expected = new ArrayList<Integer>();
-		expected.add(33);
+		ArrayList<Double> result = testGrades.getGradesTest();
+		ArrayList<Double> expected = new ArrayList<Double>();
+		expected.add(33.0);
 		assertEquals(expected, result);
 	}
 
@@ -98,10 +98,10 @@ public class GradesWhenCreateGradesSetGrades {
 		Grades testGrades = new Grades();
 		testGrades.setGradesTest(33);
 		testGrades.setGradesTest(92);
-		ArrayList<Integer> result = testGrades.getGradesTest();
-		ArrayList<Integer> expected = new ArrayList<Integer>();
-		expected.add(33);
-		expected.add(92);
+		ArrayList<Double> result = testGrades.getGradesTest();
+		ArrayList<Double> expected = new ArrayList<Double>();
+		expected.add(33.0);
+		expected.add(92.0);
 		assertEquals(expected, result);
 	}
 

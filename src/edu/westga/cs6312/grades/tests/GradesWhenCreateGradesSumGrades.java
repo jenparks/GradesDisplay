@@ -28,8 +28,8 @@ public class GradesWhenCreateGradesSumGrades {
 		testGrades.setGradesLab(50);
 		testGrades.setGradesLab(50);
 		testGrades.setGradesLab(50);
-		int result = testGrades.sumGradesLab();
-		assertEquals(150, result);
+		double result = testGrades.sumGradesLab();
+		assertEquals(150.0, result);
 	}
 
 	/**
@@ -41,8 +41,8 @@ public class GradesWhenCreateGradesSumGrades {
 		testGrades.setGradesProject(95);
 		testGrades.setGradesProject(50);
 		testGrades.setGradesProject(50);
-		int result = testGrades.sumGradesProject();
-		assertEquals(195, result);
+		double result = testGrades.sumGradesProject();
+		assertEquals(195.0, result);
 	}
 
 	/**
@@ -54,8 +54,8 @@ public class GradesWhenCreateGradesSumGrades {
 		testGrades.setGradesTest(50);
 		testGrades.setGradesTest(20);
 		testGrades.setGradesTest(30);
-		int result = testGrades.sumGradesTest();
-		assertEquals(100, result);
+		double result = testGrades.sumGradesTest();
+		assertEquals(100.0, result);
 	}
 
 }

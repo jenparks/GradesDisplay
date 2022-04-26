@@ -17,9 +17,9 @@ public class Grades {
 	private String studentID;
 	private String firstName;
 	private String lastName;
-	private ArrayList<Integer> gradesLab;
-	private ArrayList<Integer> gradesProject;
-	private ArrayList<Integer> gradesTest;
+	private ArrayList<Double> gradesLab;
+	private ArrayList<Double> gradesProject;
+	private ArrayList<Double> gradesTest;
 
 	/**
 	 * 0-parameter constructor, initializes variables
@@ -28,9 +28,9 @@ public class Grades {
 		this.studentID = "";
 		this.firstName = "";
 		this.lastName = "";
-		this.gradesLab = new ArrayList<Integer>();
-		this.gradesProject = new ArrayList<Integer>();
-		this.gradesTest = new ArrayList<Integer>();
+		this.gradesLab = new ArrayList<Double>();
+		this.gradesProject = new ArrayList<Double>();
+		this.gradesTest = new ArrayList<Double>();
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class Grades {
 	 * @param newGrade Grade to be added to lab arraylist
 	 * @precondition Grade added must be <= 100 & >= 0
 	 */
-	public void setGradesLab(int newGrade) {
+	public void setGradesLab(double newGrade) {
 		if (newGrade < 0 || newGrade > 100) {
 			throw new IllegalArgumentException("Added grade must be between 0 and 100");
 		}
@@ -117,7 +117,7 @@ public class Grades {
 	 * 
 	 * @return ArrayList of student's lab grades
 	 */
-	public ArrayList<Integer> getGradesLab() {
+	public ArrayList<Double> getGradesLab() {
 		return this.gradesLab;
 	}
 
@@ -127,7 +127,7 @@ public class Grades {
 	 * @param newGrade Grade to be added to project arraylist
 	 * @precondition Grade added must be <= 100 & >= 0
 	 */
-	public void setGradesProject(int newGrade) {
+	public void setGradesProject(double newGrade) {
 		if (newGrade < 0 || newGrade > 100) {
 			throw new IllegalArgumentException("Added grade must be between 0 and 100");
 		}
@@ -139,7 +139,7 @@ public class Grades {
 	 * 
 	 * @return ArrayList of student's project grades
 	 */
-	public ArrayList<Integer> getGradesProject() {
+	public ArrayList<Double> getGradesProject() {
 		return this.gradesProject;
 	}
 
@@ -149,7 +149,7 @@ public class Grades {
 	 * @param newGrade Grade to be added to test arraylist
 	 * @precondition Grade added must be <= 100 & >= 0
 	 */
-	public void setGradesTest(int newGrade) {
+	public void setGradesTest(double newGrade) {
 		if (newGrade < 0 || newGrade > 100) {
 			throw new IllegalArgumentException("Added grade must be between 0 and 100");
 		}
@@ -161,7 +161,7 @@ public class Grades {
 	 * 
 	 * @return ArrayList of student's test grades
 	 */
-	public ArrayList<Integer> getGradesTest() {
+	public ArrayList<Double> getGradesTest() {
 		return this.gradesTest;
 	}
 
@@ -170,8 +170,8 @@ public class Grades {
 	 * 
 	 * @return Sum of student's lab grades
 	 */
-	public int sumGradesLab() {
-		int sum = 0;
+	public double sumGradesLab() {
+		double sum = 0;
 		for (int count = 0; count < this.gradesLab.size(); count++) {
 			sum += this.gradesLab.get(count);
 		}
@@ -183,8 +183,8 @@ public class Grades {
 	 * 
 	 * @return Sum of student's project grades
 	 */
-	public int sumGradesProject() {
-		int sum = 0;
+	public double sumGradesProject() {
+		double sum = 0;
 		for (int count = 0; count < this.gradesProject.size(); count++) {
 			sum += this.gradesProject.get(count);
 		}
@@ -196,8 +196,8 @@ public class Grades {
 	 * 
 	 * @return Sum of student's test grades
 	 */
-	public int sumGradesTest() {
-		int sum = 0;
+	public double sumGradesTest() {
+		double sum = 0;
 		for (int count = 0; count < this.gradesTest.size(); count++) {
 			sum += this.gradesTest.get(count);
 		}
