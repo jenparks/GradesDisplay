@@ -142,4 +142,32 @@ public class GradebookWhenCreateGradebook {
 		assertEquals(expected, result);
 	}
 
+	/**
+	 * Tests creating Gradebook object, calculate overall average weighted
+	 */
+	@Test
+	public void testCreateGradebookGetWeightedAverage() {
+		Gradebook testGradebook = new Gradebook();
+
+		Grades addGradesPotential = new Grades();
+		addGradesPotential.setGradesLab(100);
+		addGradesPotential.setGradesLab(100);
+		addGradesPotential.setGradesProject(100);
+		addGradesPotential.setGradesProject(100);
+		addGradesPotential.setGradesTest(100);
+		testGradebook.addToPotentialPoints(addGradesPotential);
+		Grades addGradesStudent = new Grades();
+		addGradesStudent.setGradesLab(90);
+		addGradesStudent.setGradesLab(80);
+		addGradesStudent.setGradesProject(70);
+		addGradesStudent.setGradesProject(90);
+		addGradesStudent.setGradesTest(50);
+		testGradebook.addToGradebook(addGradesStudent);
+
+		ArrayList<Double> result = testGradebook.getAverageOverallWeighted();
+		ArrayList<Double> expected = new ArrayList<Double>();
+		expected.add(67.5);
+		assertEquals(expected, result);
+	}
+
 }

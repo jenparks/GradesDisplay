@@ -130,4 +130,20 @@ public class Gradebook {
 		}
 		return finalAverages;
 	}
+
+	/**
+	 * Calculates overall grade for each student in Gradebook - uses weighted
+	 * average (Labs 20%, Projects 35%, Tests 45%)
+	 * 
+	 * @return ArrayList of all overall average grades (by student)
+	 */
+	public ArrayList<Double> getAverageOverallWeighted() {
+		ArrayList<Double> finalAverages = new ArrayList<Double>();
+		for (int count = 0; count < this.studentGradebook.size(); count++) {
+			double total = .20 * this.getAverageGradesLab().get(count) + .35 * this.getAverageGradesProject().get(count)
+					+ .45 * this.getAverageGradesTest().get(count);
+			finalAverages.add(total);
+		}
+		return finalAverages;
+	}
 }
