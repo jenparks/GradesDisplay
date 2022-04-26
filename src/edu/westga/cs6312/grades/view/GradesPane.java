@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 /**
- * Subclass of Pane. Draws grades display.
+ * Subclass of GridPane. Draws grades display.
  * 
  * @author Jennifer Parks
  * @version Apr 25, 2022
@@ -38,13 +38,14 @@ public class GradesPane extends GridPane {
 	 * Shows a basic grades display for one student
 	 */
 	public void showGrades() {
-		Grades thisGrades = this.studentGrades.getGradebookData().get(1);
+		Grades thisGrades = this.studentGrades.getGradebookData().get(0);
+		
+		this.studentGrades.getAverageGradesLab().get(0);
 		Label studentName = new Label(thisGrades.getFirstName() + " " + thisGrades.getLastName());
-		Label labAverage = new Label(thisGrades.sumGradesLab() + "");
-		Label projectAverage = new Label(thisGrades.sumGradesProject() + "");
-		Label testAverage = new Label(thisGrades.sumGradesTest() + "");
-		int total = thisGrades.sumGradesLab() + thisGrades.sumGradesProject() + thisGrades.sumGradesTest();
-		Label totalAverage = new Label(total + "");
+		Label labAverage = new Label(this.studentGrades.getAverageGradesLab().get(0) + "");
+		Label projectAverage = new Label(this.studentGrades.getAverageGradesProject().get(0) + "");
+		Label testAverage = new Label(this.studentGrades.getAverageGradesProject().get(0) + "");
+		Label totalAverage = new Label(this.studentGrades.getAverageOverallStraight().get(0) + "");
 		super.add(studentName, 0, 0);
 		super.add(labAverage, 0, 1);
 		super.add(projectAverage, 0, 2);

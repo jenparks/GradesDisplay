@@ -46,9 +46,12 @@ public class GradesGUI {
 	private void readData() {
 		try {
 			Scanner dataFromFile = new Scanner(new File("data.txt"));
+			String nextWholeLine = dataFromFile.nextLine();
+			Grades addGrades = this.readEachUserGrades(nextWholeLine);
+			this.mainGradebook.addToPotentialPoints(addGrades);
 			do {
-				String nextWholeLine = dataFromFile.nextLine();
-				Grades addGrades = this.readEachUserGrades(nextWholeLine);
+				nextWholeLine = dataFromFile.nextLine();
+				addGrades = this.readEachUserGrades(nextWholeLine);
 				this.mainGradebook.addToGradebook(addGrades);
 			} while (dataFromFile.hasNextLine());
 		} catch (FileNotFoundException ex) {
