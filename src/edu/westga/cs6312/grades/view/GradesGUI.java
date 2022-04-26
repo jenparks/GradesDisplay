@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import edu.westga.cs6312.grades.model.Gradebook;
 import edu.westga.cs6312.grades.model.Grades;
 
 /**
@@ -18,16 +19,14 @@ import edu.westga.cs6312.grades.model.Grades;
  *
  */
 public class GradesGUI {
-	private Grades maxGrades;
-	private Grades studentGrades;
+	private Gradebook mainGradebook;
 	private GradesPane userPane;
 
 	/**
 	 * Constructor that gets data read from file & creates PieGraph
 	 */
 	public GradesGUI() {
-		this.maxGrades = new Grades();
-		this.studentGrades = new Grades();
+		this.mainGradebook = new Gradebook();
 		this.readData();
 		this.createGradesPane();
 	}
@@ -47,10 +46,11 @@ public class GradesGUI {
 	private void readData() {
 		try {
 			Scanner dataFromFile = new Scanner(new File("data.txt"));
-			String nextWholeLine = dataFromFile.nextLine();
-			this.maxGrades = this.readEachUserGrades(nextWholeLine);
-			nextWholeLine = dataFromFile.nextLine();
-			this.studentGrades = this.readEachUserGrades(nextWholeLine);
+			do {
+				String nextWholeLine = dataFromFile.nextLine();
+				Grades addGrades = this.readEachUserGrades(nextWholeLine);
+				this.mainGradebook.addToGradebook(addGrades);
+			} while (dataFromFile.hasNextLine());
 		} catch (FileNotFoundException ex) {
 			System.out.println("Error with file, try again");
 		}
@@ -97,7 +97,7 @@ public class GradesGUI {
 	 */
 	private void createGradesPane() {
 		try {
-			this.userPane = new GradesPane(this.studentGrades);
+			this.userPane = new GradesPane(this.mainGradebook);
 		} catch (IllegalArgumentException ex) {
 			System.out.println("Grades data is empty");
 		}

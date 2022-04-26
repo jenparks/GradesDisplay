@@ -4,6 +4,7 @@
 
 package edu.westga.cs6312.grades.view;
 
+import edu.westga.cs6312.grades.model.Gradebook;
 import edu.westga.cs6312.grades.model.Grades;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -16,7 +17,7 @@ import javafx.scene.layout.GridPane;
  *
  */
 public class GradesPane extends GridPane {
-	private Grades studentGrades;
+	private Gradebook studentGrades;
 	
 	/**
 	 * 1-parameter constructor, creates object
@@ -24,7 +25,7 @@ public class GradesPane extends GridPane {
 	 * @param newGrades Grades object to be used to draw pie graph
 	 * @precondition Grades cannot be null
 	 */
-	public GradesPane(Grades newGrades) {
+	public GradesPane(Gradebook newGrades) {
 		if (newGrades == null) {
 			throw new IllegalArgumentException("Cannot create pie graph from null data set");
 		}
@@ -37,11 +38,12 @@ public class GradesPane extends GridPane {
 	 * Shows a basic grades display for one student
 	 */
 	public void showGrades() {
-		Label studentName = new Label(this.studentGrades.getFirstName() + " " + this.studentGrades.getLastName());
-		Label labAverage = new Label(this.studentGrades.sumGradesLab() + "");
-		Label projectAverage = new Label(this.studentGrades.sumGradesProject() + "");
-		Label testAverage = new Label(this.studentGrades.sumGradesTest() + "");
-		int total = this.studentGrades.sumGradesLab() + this.studentGrades.sumGradesProject() + this.studentGrades.sumGradesTest();
+		Grades thisGrades = this.studentGrades.getGradebookData().get(1);
+		Label studentName = new Label(thisGrades.getFirstName() + " " + thisGrades.getLastName());
+		Label labAverage = new Label(thisGrades.sumGradesLab() + "");
+		Label projectAverage = new Label(thisGrades.sumGradesProject() + "");
+		Label testAverage = new Label(thisGrades.sumGradesTest() + "");
+		int total = thisGrades.sumGradesLab() + thisGrades.sumGradesProject() + thisGrades.sumGradesTest();
 		Label totalAverage = new Label(total + "");
 		super.add(studentName, 0, 0);
 		super.add(labAverage, 0, 1);
