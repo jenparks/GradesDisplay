@@ -164,4 +164,44 @@ public class Grades {
 	public ArrayList<Integer> getGradesTest() {
 		return this.gradesTest;
 	}
+
+	/**
+	 * Gets sum of student's lab grades
+	 * 
+	 * @return Sum of student's lab grades
+	 */
+	public int sumGradesLab() {
+		int sum = 0;
+		for (int count = 0; count < this.gradesLab.size(); count++) {
+			sum += this.gradesLab.get(count);
+		}
+		return sum;
+	}
+
+	/**
+	 * Gets sum of student's project grades
+	 * 
+	 * @return Sum of student's project grades
+	 */
+	public int sumGradesProject() {
+		int sum = 0;
+		for (int count = 0; count < this.gradesProject.size(); count++) {
+			sum += this.gradesProject.get(count);
+		}
+		return sum;
+	}
+
+	/**
+	 * Gets sum of student's test grades
+	 * 
+	 * @return Sum of student's test grades
+	 */
+	public int sumGradesTest() {
+		int sum = 0;
+		for (int count = 0; count < this.gradesTest.size(); count++) {
+			sum += this.gradesTest.get(count);
+		}
+		return sum;
+	}
+
 }
