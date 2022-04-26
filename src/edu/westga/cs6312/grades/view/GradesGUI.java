@@ -78,15 +78,15 @@ public class GradesGUI {
 			int grade = nextInputLine.nextInt();
 			dataEntryGrades.setGradesLab(grade);
 		}
-		String gap1 = nextInputLine.next();
+		nextInputLine.next();
 		while (nextInputLine.hasNextInt()) {
 			int grade = nextInputLine.nextInt();
 			dataEntryGrades.setGradesProject(grade);
 		}
-		String gap2 = nextInputLine.next();
+		nextInputLine.next();
 		while (nextInputLine.hasNextInt()) {
 			int grade = nextInputLine.nextInt();
-			dataEntryGrades.setGradesProject(grade);
+			dataEntryGrades.setGradesTest(grade);
 		}
 		nextInputLine.close();
 		return dataEntryGrades;
