@@ -103,11 +103,11 @@ public class Grades {
 	 * Adds a new grade to the lab arraylist
 	 * 
 	 * @param newGrade Grade to be added to lab arraylist
-	 * @precondition Grade added must be <= 100 & >= 0
+	 * @precondition Grade added must be >= 0
 	 */
 	public void setGradesLab(double newGrade) {
-		if (newGrade < 0 || newGrade > 100) {
-			throw new IllegalArgumentException("Added grade must be between 0 and 100");
+		if (newGrade < 0) {
+			throw new IllegalArgumentException("Added grade must be greater than 0");
 		}
 		this.gradesLab.add(newGrade);
 	}
@@ -125,11 +125,11 @@ public class Grades {
 	 * Adds a new grade to the project arraylist
 	 * 
 	 * @param newGrade Grade to be added to project arraylist
-	 * @precondition Grade added must be <= 100 & >= 0
+	 * @precondition Grade added must be >= 0
 	 */
 	public void setGradesProject(double newGrade) {
-		if (newGrade < 0 || newGrade > 100) {
-			throw new IllegalArgumentException("Added grade must be between 0 and 100");
+		if (newGrade < 0) {
+			throw new IllegalArgumentException("Added grade must be greater than 0");
 		}
 		this.gradesProject.add(newGrade);
 	}
@@ -147,11 +147,11 @@ public class Grades {
 	 * Adds a new grade to the test arraylist
 	 * 
 	 * @param newGrade Grade to be added to test arraylist
-	 * @precondition Grade added must be <= 100 & >= 0
+	 * @precondition Grade added must be >= 0
 	 */
 	public void setGradesTest(double newGrade) {
-		if (newGrade < 0 || newGrade > 100) {
-			throw new IllegalArgumentException("Added grade must be between 0 and 100");
+		if (newGrade < 0) {
+			throw new IllegalArgumentException("Added grade must be greater than 0");
 		}
 		this.gradesTest.add(newGrade);
 	}
