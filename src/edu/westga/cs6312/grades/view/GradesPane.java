@@ -35,7 +35,8 @@ import javafx.scene.text.Font;
 public class GradesPane extends GridPane {
 	private Gradebook studentGrades;
 	private ComboBox<String> textCombo;
-
+	private int selectedGradesIndex;
+	
 	/**
 	 * 1-parameter constructor, creates object
 	 * 
@@ -47,6 +48,7 @@ public class GradesPane extends GridPane {
 			throw new IllegalArgumentException("Cannot create pie graph from null data set");
 		}
 		this.studentGrades = newGrades;
+		this.selectedGradesIndex = 0;
 		super.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		super.setPrefSize(550, 550);
 		super.setVgap(10);
@@ -55,11 +57,10 @@ public class GradesPane extends GridPane {
 
 		this.showMenu();
 		this.showBarGraph();
-
 	}
 
 	private void showMenu() {
-		Grades thisGrades = this.studentGrades.getGradebookData().get(0);
+		Grades thisGrades = this.studentGrades.getGradebookData().get(this.selectedGradesIndex);
 
 		Menu fileMenu = new Menu("_File");
 		MenuItem menuFileOpen = new MenuItem("_Open");
@@ -97,37 +98,45 @@ public class GradesPane extends GridPane {
 		outsideSquare.setFill(Color.TRANSPARENT);
 		outsideSquare.setStroke(Color.BLACK);
 
-		Label labAverageLabel = new Label("Lab Average: " + this.studentGrades.getAverageGradesLab().get(0));
+		Label labAverageLabel = new Label(
+				"Lab Average: " + this.studentGrades.getAverageGradesLab().get(this.selectedGradesIndex));
 		Rectangle labAverage = new Rectangle(0, 50);
-		labAverage.widthProperty().bind(
-				super.widthProperty().multiply(this.studentGrades.getAverageGradesLab().get(0) / 100).multiply(.9));
+		labAverage.widthProperty().bind(super.widthProperty()
+				.multiply(this.studentGrades.getAverageGradesLab().get(this.selectedGradesIndex) / 100).multiply(.9));
 		labAverage.setFill(Color.RED);
 
 		Label projectAverageLabel = new Label(
-				"Project Average: " + this.studentGrades.getAverageGradesProject().get(0));
+				"Project Average: " + this.studentGrades.getAverageGradesProject().get(this.selectedGradesIndex));
 		Rectangle projectAverage = new Rectangle(0, 50);
-		projectAverage.widthProperty().bind(
-				super.widthProperty().multiply(this.studentGrades.getAverageGradesProject().get(0) / 100).multiply(.9));
+		projectAverage.widthProperty()
+				.bind(super.widthProperty()
+						.multiply(this.studentGrades.getAverageGradesProject().get(this.selectedGradesIndex) / 100)
+						.multiply(.9));
 		projectAverage.setFill(Color.ORANGE);
 
-		Label testAverageLabel = new Label("Test Average: " + this.studentGrades.getAverageGradesTest().get(0));
+		Label testAverageLabel = new Label(
+				"Test Average: " + this.studentGrades.getAverageGradesTest().get(this.selectedGradesIndex));
 		Rectangle testAverage = new Rectangle(0, 50);
-		testAverage.widthProperty().bind(
-				super.widthProperty().multiply(this.studentGrades.getAverageGradesTest().get(0) / 100).multiply(.9));
+		testAverage.widthProperty().bind(super.widthProperty()
+				.multiply(this.studentGrades.getAverageGradesTest().get(this.selectedGradesIndex) / 100).multiply(.9));
 		testAverage.setFill(Color.GREEN);
 
 		Label straightAverageLabel = new Label(
-				"Straight Average: " + this.studentGrades.getAverageOverallStraight().get(0));
+				"Straight Average: " + this.studentGrades.getAverageOverallStraight().get(this.selectedGradesIndex));
 		Rectangle straightAverage = new Rectangle(0, 50);
-		straightAverage.widthProperty().bind(super.widthProperty()
-				.multiply(this.studentGrades.getAverageOverallStraight().get(0) / 100).multiply(.9));
+		straightAverage.widthProperty()
+				.bind(super.widthProperty()
+						.multiply(this.studentGrades.getAverageOverallStraight().get(this.selectedGradesIndex) / 100)
+						.multiply(.9));
 		straightAverage.setFill(Color.BLUE);
 
 		Label weightedAverageLabel = new Label(
-				"Weighted Average: " + this.studentGrades.getAverageOverallWeighted().get(0));
+				"Weighted Average: " + this.studentGrades.getAverageOverallWeighted().get(this.selectedGradesIndex));
 		Rectangle weightedAverage = new Rectangle(0, 50);
-		weightedAverage.widthProperty().bind(super.widthProperty()
-				.multiply(this.studentGrades.getAverageOverallWeighted().get(0) / 100).multiply(.9));
+		weightedAverage.widthProperty()
+				.bind(super.widthProperty()
+						.multiply(this.studentGrades.getAverageOverallWeighted().get(this.selectedGradesIndex) / 100)
+						.multiply(.9));
 		weightedAverage.setFill(Color.PURPLE);
 
 		VBox barGraph = new VBox(10);
@@ -143,7 +152,10 @@ public class GradesPane extends GridPane {
 		@Override
 		public void handle(ActionEvent event) {
 			String menuResult = GradesPane.this.textCombo.getValue();
-			int indexFromArray = GradesPane.this.textCombo.getItems().indexOf(menuResult);
+			GradesPane.this.selectedGradesIndex = GradesPane.this.textCombo.getItems().indexOf(menuResult);
+			GradesPane.super.getChildren().clear();
+			GradesPane.this.showMenu();
+			GradesPane.this.showBarGraph();
 		}
 	}
 
