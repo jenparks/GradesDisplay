@@ -17,7 +17,7 @@ import edu.westga.cs6312.grades.model.Grades;
  * @version Apr 25, 2022
  *
  */
-public class GradesWhenCreateGradesSumGrades {
+public class GradesWhenCreateGradesSumAndAverageGrades {
 
 	/**
 	 * Tests creating Grades object, sum lab grades
@@ -56,6 +56,63 @@ public class GradesWhenCreateGradesSumGrades {
 		testGrades.setGradesTest(30);
 		double result = testGrades.sumGradesTest();
 		assertEquals(100.0, result);
+	}
+
+	/**
+	 * Tests creating Grades object, average lab grades
+	 */
+	@Test
+	public void testCreateGradesAverage3LabGrades() {
+		Grades totalPoints = new Grades();
+		totalPoints.setGradesLab(100);
+		totalPoints.setGradesLab(100);
+		totalPoints.setGradesLab(100);
+
+		Grades testGrades = new Grades();
+		testGrades.setTotalPoints(totalPoints);
+		testGrades.setGradesLab(50);
+		testGrades.setGradesLab(50);
+		testGrades.setGradesLab(50);
+		double result = testGrades.getLabAverage();
+		assertEquals(0.50, result);
+	}
+
+	/**
+	 * Tests creating Grades object, average project grades
+	 */
+	@Test
+	public void testCreateGradesAverage3ProjectGrades() {
+		Grades totalPoints = new Grades();
+		totalPoints.setGradesProject(100);
+		totalPoints.setGradesProject(100);
+		totalPoints.setGradesProject(100);
+
+		Grades testGrades = new Grades();
+		testGrades.setTotalPoints(totalPoints);
+		testGrades.setGradesProject(100);
+		testGrades.setGradesProject(50);
+		testGrades.setGradesProject(3);
+		double result = testGrades.getProjectAverage();
+		assertEquals(0.51, result);
+	}
+
+	/**
+	 * Tests creating Grades object, average test grades
+	 */
+	@Test
+	public void testCreateGradesAverage3TestGrades() {
+		Grades totalPoints = new Grades();
+		totalPoints.setGradesTest(100);
+		totalPoints.setGradesTest(100);
+		totalPoints.setGradesTest(100);
+
+		Grades testGrades = new Grades();
+		testGrades.setTotalPoints(totalPoints);
+		testGrades.setGradesTest(50);
+		testGrades.setGradesTest(20);
+		testGrades.setGradesTest(32);
+		double result = testGrades.getTestAverage();
+		assertEquals(0.34, result);
 	}
 
 }

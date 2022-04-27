@@ -20,6 +20,7 @@ public class Grades {
 	private ArrayList<Double> gradesLab;
 	private ArrayList<Double> gradesProject;
 	private ArrayList<Double> gradesTest;
+	private Grades totalPoints;
 
 	/**
 	 * 0-parameter constructor, initializes variables
@@ -202,6 +203,45 @@ public class Grades {
 			sum += this.gradesTest.get(count);
 		}
 		return sum;
+	}
+
+	/**
+	 * Sets the object that holds total points for the grades
+	 * 
+	 * @param allPoints Grades object that has all available points
+	 */
+	public void setTotalPoints(Grades allPoints) {
+		this.totalPoints = allPoints;
+	}
+
+	/**
+	 * Calculates & returns average of lab grades
+	 * 
+	 * @return Average lab grade, expressed as decimal (not percent)
+	 */
+	public double getLabAverage() {
+		double average = this.sumGradesLab() / this.totalPoints.sumGradesLab();
+		return average;
+	}
+
+	/**
+	 * Calculates & returns average of project grades
+	 * 
+	 * @return Average project grade, expressed as decimal (not percent)
+	 */
+	public double getProjectAverage() {
+		double average = this.sumGradesProject() / this.totalPoints.sumGradesProject();
+		return average;
+	}
+
+	/**
+	 * Calculates & returns average of test grades
+	 * 
+	 * @return Average test grade, expressed as decimal (not percent)
+	 */
+	public double getTestAverage() {
+		double average = this.sumGradesTest() / this.totalPoints.sumGradesTest();
+		return average;
 	}
 
 }
