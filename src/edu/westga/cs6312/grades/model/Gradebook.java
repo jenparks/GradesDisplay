@@ -49,8 +49,8 @@ public class Gradebook {
 	}
 
 	/**
-	 * Adds a new Grades object to the student ArrayList (represents one student's
-	 * scores)
+	 * Adds total potential points to Grade object & adds to the student ArrayList
+	 * (represents one student's scores)
 	 * 
 	 * @param newGrades Grades object to add to ArrayList
 	 * @precondition Grades cannot be null
@@ -59,6 +59,7 @@ public class Gradebook {
 		if (newGrades == null) {
 			throw new IllegalArgumentException("Cannot add null grades");
 		}
+		newGrades.setTotalPoints(this.potentialPoints);
 		this.studentGradebook.add(newGrades);
 	}
 
@@ -72,64 +73,11 @@ public class Gradebook {
 	}
 
 	/**
-	 * Calculates average lab grades for each student in Gradebook
-	 * 
-	 * @return ArrayList of all average lab grades (by student)
-	 */
-	public ArrayList<Double> getAverageGradesLab() {
-		ArrayList<Double> labAverages = new ArrayList<Double>();
-		for (Grades element : this.studentGradebook) {
-			double average = (element.sumGradesLab() / this.potentialPoints.sumGradesLab()) * 100;
-			labAverages.add(average);
-		}
-		return labAverages;
-	}
-
-	/**
-	 * Calculates average project grades for each student in Gradebook
-	 * 
-	 * @return ArrayList of all average project grades (by student)
-	 */
-	public ArrayList<Double> getAverageGradesProject() {
-		ArrayList<Double> projectAverages = new ArrayList<Double>();
-		for (Grades element : this.studentGradebook) {
-			double average = (element.sumGradesProject() / this.potentialPoints.sumGradesProject()) * 100;
-			projectAverages.add(average);
-		}
-		return projectAverages;
-	}
-
-	/**
-	 * Calculates average test grades for each student in Gradebook
-	 * 
-	 * @return ArrayList of all average test grades (by student)
-	 */
-	public ArrayList<Double> getAverageGradesTest() {
-		ArrayList<Double> testAverages = new ArrayList<Double>();
-		for (Grades element : this.studentGradebook) {
-			double average = (element.sumGradesTest() / this.potentialPoints.sumGradesTest()) * 100;
-			testAverages.add(average);
-		}
-		return testAverages;
-	}
-
-	/**
 	 * Calculates overall grade for each student in Gradebook - uses straight
 	 * average
 	 * 
 	 * @return ArrayList of all overall average grades (by student)
 	 */
-	public ArrayList<Double> getAverageOverallStraight() {
-		ArrayList<Double> finalAverages = new ArrayList<Double>();
-		for (Grades element : this.studentGradebook) {
-			double sumStudentGrades = element.sumGradesLab() + element.sumGradesProject() + element.sumGradesTest();
-			double sumPotentialPoints = this.potentialPoints.sumGradesLab() + this.potentialPoints.sumGradesProject()
-					+ this.potentialPoints.sumGradesTest();
-			double average = (sumStudentGrades / sumPotentialPoints) * 100;
-			finalAverages.add(average);
-		}
-		return finalAverages;
-	}
 
 	/**
 	 * Calculates overall grade for each student in Gradebook - uses weighted
@@ -137,13 +85,4 @@ public class Gradebook {
 	 * 
 	 * @return ArrayList of all overall average grades (by student)
 	 */
-	public ArrayList<Double> getAverageOverallWeighted() {
-		ArrayList<Double> finalAverages = new ArrayList<Double>();
-		for (int count = 0; count < this.studentGradebook.size(); count++) {
-			double total = .20 * this.getAverageGradesLab().get(count) + .35 * this.getAverageGradesProject().get(count)
-					+ .45 * this.getAverageGradesTest().get(count);
-			finalAverages.add(total);
-		}
-		return finalAverages;
-	}
 }
