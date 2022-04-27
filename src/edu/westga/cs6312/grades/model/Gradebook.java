@@ -72,17 +72,4 @@ public class Gradebook {
 		return this.studentGradebook;
 	}
 
-	/**
-	 * Calculates overall grade for each student in Gradebook - uses straight
-	 * average
-	 * 
-	 * @return ArrayList of all overall average grades (by student)
-	 */
-
-	/**
-	 * Calculates overall grade for each student in Gradebook - uses weighted
-	 * average (Labs 20%, Projects 35%, Tests 45%)
-	 * 
-	 * @return ArrayList of all overall average grades (by student)
-	 */
 }

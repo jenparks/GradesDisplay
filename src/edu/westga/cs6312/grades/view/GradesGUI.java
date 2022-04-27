@@ -6,10 +6,12 @@ package edu.westga.cs6312.grades.view;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import edu.westga.cs6312.grades.model.Gradebook;
 import edu.westga.cs6312.grades.model.Grades;
+import javafx.stage.FileChooser;
 
 /**
  * Creates GUI for gradebook display
@@ -44,8 +46,12 @@ public class GradesGUI {
 	 * Helper method - reads in a file
 	 */
 	private void readData() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Resource File");
+		File userFile = fileChooser.showOpenDialog(null);
+
 		try {
-			Scanner dataFromFile = new Scanner(new File("data.txt"));
+			Scanner dataFromFile = new Scanner(userFile);
 			String nextWholeLine = dataFromFile.nextLine();
 			Grades addGrades = this.readEachUserGrades(nextWholeLine);
 			this.mainGradebook.addToPotentialPoints(addGrades);
@@ -54,6 +60,7 @@ public class GradesGUI {
 				addGrades = this.readEachUserGrades(nextWholeLine);
 				this.mainGradebook.addToGradebook(addGrades);
 			} while (dataFromFile.hasNextLine());
+			dataFromFile.close();
 		} catch (FileNotFoundException ex) {
 			System.out.println("Error with file, try again");
 		}
@@ -68,30 +75,35 @@ public class GradesGUI {
 	private Grades readEachUserGrades(String nextWholeLine) {
 		Grades dataEntryGrades = new Grades();
 
-		Scanner nextInputLine = new Scanner(nextWholeLine);
-		nextInputLine.useDelimiter(",");
+		try {
+			Scanner nextInputLine = new Scanner(nextWholeLine);
+			nextInputLine.useDelimiter(",");
 
-		String id = nextInputLine.next();
-		dataEntryGrades.setStudentID(id);
-		String firstname = nextInputLine.next();
-		dataEntryGrades.setFirstName(firstname);
-		String lastname = nextInputLine.next();
-		dataEntryGrades.setLastName(lastname);
-		while (nextInputLine.hasNextInt()) {
-			int grade = nextInputLine.nextInt();
-			dataEntryGrades.setGradesLab(grade);
+			String id = nextInputLine.next();
+			dataEntryGrades.setStudentID(id);
+			String firstname = nextInputLine.next();
+			dataEntryGrades.setFirstName(firstname);
+			String lastname = nextInputLine.next();
+			dataEntryGrades.setLastName(lastname);
+			while (nextInputLine.hasNextInt()) {
+				int grade = nextInputLine.nextInt();
+				dataEntryGrades.setGradesLab(grade);
+			}
+			nextInputLine.next();
+			while (nextInputLine.hasNextInt()) {
+				int grade = nextInputLine.nextInt();
+				dataEntryGrades.setGradesProject(grade);
+			}
+			nextInputLine.next();
+			while (nextInputLine.hasNextInt()) {
+				int grade = nextInputLine.nextInt();
+				dataEntryGrades.setGradesTest(grade);
+			}
+			nextInputLine.close();
+
+		} catch (NoSuchElementException ex) {
+			System.out.println("The file is not formatted correctly");
 		}
-		nextInputLine.next();
-		while (nextInputLine.hasNextInt()) {
-			int grade = nextInputLine.nextInt();
-			dataEntryGrades.setGradesProject(grade);
-		}
-		nextInputLine.next();
-		while (nextInputLine.hasNextInt()) {
-			int grade = nextInputLine.nextInt();
-			dataEntryGrades.setGradesTest(grade);
-		}
-		nextInputLine.close();
 		return dataEntryGrades;
 	}
 
