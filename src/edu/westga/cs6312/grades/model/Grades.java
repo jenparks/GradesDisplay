@@ -244,4 +244,28 @@ public class Grades {
 		return average;
 	}
 
+	/**
+	 * Calculates straight average
+	 * 
+	 * @return Straight average
+	 */
+	public double getStraightAverage() {
+		double earned = this.sumGradesLab() + this.sumGradesProject() + this.sumGradesTest();
+		double possible = this.totalPoints.sumGradesLab() + this.totalPoints.sumGradesProject()
+				+ this.totalPoints.sumGradesTest();
+		return (earned / possible);
+	}
+
+	/**
+	 * Calculates weighted average (also tries to account for java floating point
+	 * issues)
+	 * 
+	 * @return Weighted average
+	 */
+	public double getWeightedAverage() {
+		double average = 0.20 * this.getLabAverage() + 0.35 * this.getProjectAverage() + 0.45 * this.getTestAverage();
+		int mathAverage = (int) (average * 1000);
+		average = (double) mathAverage / 1000;
+		return average;
+	}
 }

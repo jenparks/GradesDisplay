@@ -115,4 +115,52 @@ public class GradesWhenCreateGradesSumAndAverageGrades {
 		assertEquals(0.34, result);
 	}
 
+	/**
+	 * Tests creating Grades object, calculate overall average straight
+	 */
+	@Test
+	public void testCreateGradesGetStraightAverage() {
+		Grades gradesPotential = new Grades();
+		gradesPotential.setGradesLab(100);
+		gradesPotential.setGradesLab(100);
+		gradesPotential.setGradesProject(100);
+		gradesPotential.setGradesProject(100);
+		gradesPotential.setGradesTest(100);
+
+		Grades gradesStudent = new Grades();
+		gradesStudent.setTotalPoints(gradesPotential);
+		gradesStudent.setGradesLab(90);
+		gradesStudent.setGradesLab(80);
+		gradesStudent.setGradesProject(70);
+		gradesStudent.setGradesProject(90);
+		gradesStudent.setGradesTest(50);
+
+		double result = gradesStudent.getStraightAverage();
+		assertEquals(0.76, result);
+	}
+
+	/**
+	 * Tests creating Grades object, calculate overall average weighted
+	 */
+	@Test
+	public void testCreateGradebookGetWeightedAverage() {
+		Grades gradesPotential = new Grades();
+		gradesPotential.setGradesLab(100);
+		gradesPotential.setGradesLab(100);
+		gradesPotential.setGradesProject(100);
+		gradesPotential.setGradesProject(100);
+		gradesPotential.setGradesTest(100);
+
+		Grades gradesStudent = new Grades();
+		gradesStudent.setTotalPoints(gradesPotential);
+		gradesStudent.setGradesLab(90);
+		gradesStudent.setGradesLab(80);
+		gradesStudent.setGradesProject(70);
+		gradesStudent.setGradesProject(100);
+		gradesStudent.setGradesTest(75);
+
+		double result = gradesStudent.getWeightedAverage();
+		assertEquals(0.805, result);
+	}
+
 }
