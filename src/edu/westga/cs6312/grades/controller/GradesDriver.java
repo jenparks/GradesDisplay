@@ -36,7 +36,7 @@ public class GradesDriver extends Application {
 		GradesGUI userGUI = new GradesGUI();
 
 		primaryStage.setTitle("Jennifer Parks - Gradebook Project");
-		GradesPane thePane = userGUI.getPieGraphPane();
+		GradesPane thePane = userGUI.getGradesPane();
 		if (thePane == null) {
 			System.out.println("Error in creating Pane, possibly due to incorrect file reading");
 		} else {

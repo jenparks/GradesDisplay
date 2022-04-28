@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 import edu.westga.cs6312.grades.model.Gradebook;
 import edu.westga.cs6312.grades.model.Grades;
-import javafx.stage.FileChooser;
 
 /**
  * Creates GUI for gradebook display
@@ -23,12 +22,14 @@ import javafx.stage.FileChooser;
 public class GradesGUI {
 	private Gradebook mainGradebook;
 	private GradesPane userPane;
+	private File userDataFile;
 
 	/**
-	 * Constructor that gets data read from file & creates PieGraph
+	 * Constructor that gets data read from file & creates Grades bar graph
 	 */
 	public GradesGUI() {
 		this.mainGradebook = new Gradebook();
+		this.userDataFile = new File("data.txt");
 		this.readData();
 		this.createGradesPane();
 	}
@@ -36,9 +37,9 @@ public class GradesGUI {
 	/**
 	 * Getter for GradesPane
 	 * 
-	 * @return GradesPane to be used in creating pie graph display
+	 * @return GradesPane to be used in creating bar graph display
 	 */
-	public GradesPane getPieGraphPane() {
+	public GradesPane getGradesPane() {
 		return this.userPane;
 	}
 
@@ -46,12 +47,8 @@ public class GradesGUI {
 	 * Helper method - reads in a file
 	 */
 	private void readData() {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open Resource File");
-		File userFile = fileChooser.showOpenDialog(null);
-
 		try {
-			Scanner dataFromFile = new Scanner(userFile);
+			Scanner dataFromFile = new Scanner(this.userDataFile);
 			String nextWholeLine = dataFromFile.nextLine();
 			Grades addGrades = this.readEachUserGrades(nextWholeLine);
 			this.mainGradebook.addToPotentialPoints(addGrades);
@@ -100,7 +97,6 @@ public class GradesGUI {
 				dataEntryGrades.setGradesTest(grade);
 			}
 			nextInputLine.close();
-
 		} catch (NoSuchElementException ex) {
 			System.out.println("The file is not formatted correctly");
 		}
@@ -117,5 +113,5 @@ public class GradesGUI {
 			System.out.println("Grades data is empty");
 		}
 	}
-
+	
 }

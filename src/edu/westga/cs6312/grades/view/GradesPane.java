@@ -4,13 +4,15 @@
 
 package edu.westga.cs6312.grades.view;
 
+import java.io.File;
+
 import edu.westga.cs6312.grades.model.Gradebook;
 import edu.westga.cs6312.grades.model.Grades;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -24,6 +26,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * Subclass of GridPane. Draws grades display.
@@ -36,6 +40,7 @@ public class GradesPane extends GridPane {
 	private Gradebook studentGrades;
 	private ComboBox<String> textCombo;
 	private int selectedGradesIndex;
+	private File userDataFile;
 
 	/**
 	 * 1-parameter constructor, creates object
@@ -49,12 +54,12 @@ public class GradesPane extends GridPane {
 		}
 		this.studentGrades = newGrades;
 		this.selectedGradesIndex = 0;
+
 		super.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-		super.setPrefSize(550, 550);
+		super.setPrefSize(550, 600);
 		super.setVgap(10);
 		super.setHgap(35);
-		super.setAlignment(Pos.CENTER);
-
+		super.setAlignment(Pos.TOP_CENTER);
 		this.showMenu();
 		this.showGraphLines();
 		this.showBarGraph();
@@ -74,8 +79,9 @@ public class GradesPane extends GridPane {
 		MenuBar topMenuBar = new MenuBar();
 		topMenuBar.getMenus().add(fileMenu);
 		topMenuBar.getMenus().add(helpMenu);
-
 		super.add(topMenuBar, 0, 0, 2, 1);
+		menuFileOpen.setOnAction(new OpenFileDialog());
+		menuHelpAbout.setOnAction(new OpenAboutPage());
 
 		this.textCombo = new ComboBox<>();
 		for (Grades element : this.studentGrades.getGradebookData()) {
@@ -83,21 +89,20 @@ public class GradesPane extends GridPane {
 		}
 		this.textCombo.setValue("Pick a name:");
 		super.add(this.textCombo, 0, 1);
+		this.textCombo.setOnAction(new ChangeStudent());
 
 		Label studentName = new Label(thisGrades.getFirstName() + " " + thisGrades.getLastName());
 		studentName.setFont(Font.font(20));
-		super.setHalignment(studentName, HPos.CENTER);
-		super.add(studentName, 0, 2);
-
-		this.textCombo.setOnAction(new ChangeStudent());
+		super.add(studentName, 1, 1);
 	}
 
 	private void showGraphLines() {
-		Rectangle outsideSquare = new Rectangle(400, 450);
+		Rectangle outsideSquare = new Rectangle();
 		outsideSquare.widthProperty().bind(super.widthProperty().multiply(.90));
+		outsideSquare.setHeight(450);
 		outsideSquare.setFill(Color.TRANSPARENT);
 		outsideSquare.setStroke(Color.BLACK);
-		super.add(outsideSquare, 0, 3);
+		super.add(outsideSquare, 0, 3, 2, 1);
 	}
 
 	private void showBarGraph() {
@@ -136,7 +141,41 @@ public class GradesPane extends GridPane {
 				testAverageLabel, testAverage, straightAverageLabel, straightAverage, weightedAverageLabel,
 				weightedAverage);
 
-		super.add(barGraph, 0, 3);
+		super.add(barGraph, 0, 3, 2, 1);
+	}
+
+	/**
+	 * Gets the user-selected File
+	 * 
+	 * @return File selected by user
+	 */
+	public File getDataFile() {
+		return this.userDataFile;
+	}
+
+	private class OpenFileDialog implements EventHandler<ActionEvent> {
+		@Override
+		public void handle(ActionEvent event) {
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Open New File");
+			GradesPane.this.userDataFile = fileChooser.showOpenDialog(new Stage());
+		}
+	}
+
+	private class OpenAboutPage implements EventHandler<ActionEvent> {
+		@Override
+		public void handle(ActionEvent event) {
+			Stage aboutStage = new Stage();
+			GridPane aboutPane = new GridPane();
+			aboutPane.setBackground(new Background(new BackgroundFill(Color.LAVENDER, CornerRadii.EMPTY, Insets.EMPTY)));
+			aboutPane.setPrefSize(300, 300);
+			aboutPane.setAlignment(Pos.CENTER);
+			Label myName = new Label("Made by Jennifer Parks\nWith my rubber duck crew");
+			aboutPane.add(myName, 0, 0);
+			Scene theScene = new Scene(aboutPane);
+			aboutStage.setScene(theScene);
+			aboutStage.show();
+		}
 	}
 
 	private class ChangeStudent implements EventHandler<ActionEvent> {
