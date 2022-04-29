@@ -54,13 +54,22 @@ public class Gradebook {
 	 * 
 	 * @param newGrades Grades object to add to ArrayList
 	 * @precondition Grades cannot be null
+	 * @precondition Number of graded items for student must be the same for the
+	 *               total points, for a given category
 	 */
 	public void addToGradebook(Grades newGrades) {
 		if (newGrades == null) {
 			throw new IllegalArgumentException("Cannot add null grades");
 		}
-		newGrades.setTotalPoints(this.potentialPoints);
-		this.studentGradebook.add(newGrades);
+		if (newGrades.getGradesLab().size() != this.potentialPoints.getGradesLab().size()
+				|| newGrades.getGradesProject().size() != this.potentialPoints.getGradesProject().size()
+				|| newGrades.getGradesTest().size() != this.potentialPoints.getGradesTest().size()) {
+			throw new IllegalArgumentException(
+					"Number of graded items for Student is different than for Total Points\nStudent not added");
+		} else {
+			newGrades.setTotalPoints(this.potentialPoints);
+			this.studentGradebook.add(newGrades);
+		}
 	}
 
 	/**

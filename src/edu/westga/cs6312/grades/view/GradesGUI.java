@@ -22,6 +22,7 @@ import edu.westga.cs6312.grades.model.Grades;
 public class GradesGUI {
 	private Gradebook mainGradebook;
 	private GradesPane userPane;
+	private boolean studentAddError;
 
 	/**
 	 * Constructor that gets data read from file & creates Grades bar graph
@@ -56,7 +57,7 @@ public class GradesGUI {
 	public void readData(File dataFile) {
 		try {
 			this.mainGradebook = new Gradebook();
-
+			this.studentAddError = false;
 			Scanner dataFromFile = new Scanner(dataFile);
 			String nextWholeLine = dataFromFile.nextLine();
 			Grades addGrades = this.readEachUserGrades(nextWholeLine);
@@ -64,7 +65,11 @@ public class GradesGUI {
 			do {
 				nextWholeLine = dataFromFile.nextLine();
 				addGrades = this.readEachUserGrades(nextWholeLine);
-				this.mainGradebook.addToGradebook(addGrades);
+				try {
+					this.mainGradebook.addToGradebook(addGrades);
+				} catch (IllegalArgumentException ex) {
+					this.studentAddError = true;
+				}
 			} while (dataFromFile.hasNextLine());
 			dataFromFile.close();
 		} catch (FileNotFoundException ex) {
@@ -121,6 +126,16 @@ public class GradesGUI {
 		} catch (IllegalArgumentException ex) {
 			System.out.println("Grades data is empty");
 		}
+	}
+
+	/**
+	 * Returns true if there was an error adding one or more students to the
+	 * gradebook
+	 * 
+	 * @return True if error adding students to gradebook
+	 */
+	public boolean getStudentAddStatus() {
+		return this.studentAddError;
 	}
 
 }

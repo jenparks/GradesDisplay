@@ -13,6 +13,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -64,7 +66,7 @@ public class GradesPane extends GridPane {
 		super.setAlignment(Pos.TOP_CENTER);
 
 		this.showMenu();
-		if (!(newGrades == null)) {
+		if (newGrades != null) {
 			this.showHeader();
 			this.showBarGraph();
 		} else {
@@ -73,7 +75,7 @@ public class GradesPane extends GridPane {
 			super.add(noFileSelected, 1, 1);
 		}
 	}
-	
+
 	private void showMenu() {
 		Menu fileMenu = new Menu("_File");
 		MenuItem menuFileOpen = new MenuItem("_Open");
@@ -179,6 +181,13 @@ public class GradesPane extends GridPane {
 			GradesPane.this.userDataFile = fileChooser.showOpenDialog(new Stage());
 			GradesPane.this.userGUI.readData(GradesPane.this.userDataFile);
 			GradesPane.this.studentGrades = GradesPane.this.userGUI.getGUIGradebook();
+			if (GradesPane.this.userGUI.getStudentAddStatus()) {
+				Alert studentAddErrorAlert = new Alert(AlertType.ERROR);
+				studentAddErrorAlert.setTitle("Error Adding Student");
+				studentAddErrorAlert.setHeaderText("Error Adding One Or More Students");
+				studentAddErrorAlert.setContentText("Check your data file and try again");
+				studentAddErrorAlert.show();
+			}
 			GradesPane.super.getChildren().clear();
 			GradesPane.this.showMenu();
 			GradesPane.this.showHeader();
