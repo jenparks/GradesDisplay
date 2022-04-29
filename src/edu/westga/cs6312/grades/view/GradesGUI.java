@@ -20,17 +20,13 @@ import edu.westga.cs6312.grades.model.Grades;
  *
  */
 public class GradesGUI {
-	private Gradebook mainGradebook;
+	public Gradebook mainGradebook;
 	private GradesPane userPane;
-	private File userDataFile;
 
 	/**
 	 * Constructor that gets data read from file & creates Grades bar graph
 	 */
 	public GradesGUI() {
-		this.mainGradebook = new Gradebook();
-		this.userDataFile = new File("data.txt");
-		this.readData();
 		this.createGradesPane();
 	}
 
@@ -44,11 +40,15 @@ public class GradesGUI {
 	}
 
 	/**
-	 * Helper method - reads in a file
+	 * Reads in a new file & added to Gradebook object
+	 * 
+	 * @param dataFile File to be read
 	 */
-	private void readData() {
+	public void readData(File dataFile) {
 		try {
-			Scanner dataFromFile = new Scanner(this.userDataFile);
+			this.mainGradebook = new Gradebook();
+
+			Scanner dataFromFile = new Scanner(dataFile);
 			String nextWholeLine = dataFromFile.nextLine();
 			Grades addGrades = this.readEachUserGrades(nextWholeLine);
 			this.mainGradebook.addToPotentialPoints(addGrades);
@@ -106,12 +106,12 @@ public class GradesGUI {
 	/**
 	 * Helper method - creates & saves GradesPane from data in file
 	 */
-	private void createGradesPane() {
+	public void createGradesPane() {
 		try {
-			this.userPane = new GradesPane(this.mainGradebook);
+			this.userPane = new GradesPane(this.mainGradebook, this);
 		} catch (IllegalArgumentException ex) {
 			System.out.println("Grades data is empty");
 		}
 	}
-	
+
 }

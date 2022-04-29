@@ -24,6 +24,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
@@ -38,36 +39,42 @@ import javafx.stage.Stage;
  */
 public class GradesPane extends GridPane {
 	private Gradebook studentGrades;
+	private GradesGUI userGUI;
 	private ComboBox<String> textCombo;
 	private int selectedGradesIndex;
 	private File userDataFile;
 
 	/**
-	 * 1-parameter constructor, creates object
+	 * 2-parameter constructor, creates object
 	 * 
-	 * @param newGrades Grades object to be used to draw pie graph
+	 * @param newGrades Grades object to be used to draw graph
+	 * @param theGUI    The GradesGUI
 	 * @precondition Grades cannot be null
 	 */
-	public GradesPane(Gradebook newGrades) {
-		if (newGrades == null) {
-			throw new IllegalArgumentException("Cannot create pie graph from null data set");
+	public GradesPane(Gradebook newGrades, GradesGUI theGUI) {
+		if (theGUI == null) {
+			throw new IllegalArgumentException("Cannot create graph from null data set");
 		}
 		this.studentGrades = newGrades;
 		this.selectedGradesIndex = 0;
-
+		this.userGUI = theGUI;
 		super.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		super.setPrefSize(550, 600);
 		super.setVgap(10);
 		super.setHgap(35);
 		super.setAlignment(Pos.TOP_CENTER);
+
 		this.showMenu();
-		this.showGraphLines();
-		this.showBarGraph();
+		if (!(newGrades == null)) {
+			this.showHeader();
+			this.showBarGraph();
+		} else {
+			Label noFileSelected = new Label("Please select a file");
+			super.add(noFileSelected, 1, 1);
+		}
 	}
 
 	private void showMenu() {
-		Grades thisGrades = this.studentGrades.getGradebookData().get(this.selectedGradesIndex);
-
 		Menu fileMenu = new Menu("_File");
 		MenuItem menuFileOpen = new MenuItem("_Open");
 		fileMenu.getItems().add(menuFileOpen);
@@ -82,6 +89,10 @@ public class GradesPane extends GridPane {
 		super.add(topMenuBar, 0, 0, 2, 1);
 		menuFileOpen.setOnAction(new OpenFileDialog());
 		menuHelpAbout.setOnAction(new OpenAboutPage());
+	}
+
+	private void showHeader() {
+		Grades thisGrades = this.studentGrades.getGradebookData().get(this.selectedGradesIndex);
 
 		this.textCombo = new ComboBox<>();
 		for (Grades element : this.studentGrades.getGradebookData()) {
@@ -94,15 +105,14 @@ public class GradesPane extends GridPane {
 		Label studentName = new Label(thisGrades.getFirstName() + " " + thisGrades.getLastName());
 		studentName.setFont(Font.font(20));
 		super.add(studentName, 1, 1);
-	}
 
-	private void showGraphLines() {
 		Rectangle outsideSquare = new Rectangle();
-		outsideSquare.widthProperty().bind(super.widthProperty().multiply(.90));
+		outsideSquare.widthProperty().bind(super.widthProperty().multiply(.9));
 		outsideSquare.setHeight(450);
 		outsideSquare.setFill(Color.TRANSPARENT);
 		outsideSquare.setStroke(Color.BLACK);
 		super.add(outsideSquare, 0, 3, 2, 1);
+
 	}
 
 	private void showBarGraph() {
@@ -159,6 +169,13 @@ public class GradesPane extends GridPane {
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("Open New File");
 			GradesPane.this.userDataFile = fileChooser.showOpenDialog(new Stage());
+			GradesPane.this.userGUI.readData(GradesPane.this.userDataFile);
+			GradesPane.this.studentGrades = GradesPane.this.userGUI.mainGradebook;
+			GradesPane.super.getChildren().clear();
+			GradesPane.this.showMenu();
+			GradesPane.this.showHeader();
+			GradesPane.this.showBarGraph();
+
 		}
 	}
 
@@ -167,7 +184,8 @@ public class GradesPane extends GridPane {
 		public void handle(ActionEvent event) {
 			Stage aboutStage = new Stage();
 			GridPane aboutPane = new GridPane();
-			aboutPane.setBackground(new Background(new BackgroundFill(Color.LAVENDER, CornerRadii.EMPTY, Insets.EMPTY)));
+			aboutPane
+					.setBackground(new Background(new BackgroundFill(Color.LAVENDER, CornerRadii.EMPTY, Insets.EMPTY)));
 			aboutPane.setPrefSize(300, 300);
 			aboutPane.setAlignment(Pos.CENTER);
 			Label myName = new Label("Made by Jennifer Parks\nWith my rubber duck crew");
@@ -185,7 +203,7 @@ public class GradesPane extends GridPane {
 			GradesPane.this.selectedGradesIndex = GradesPane.this.textCombo.getItems().indexOf(menuResult);
 			GradesPane.super.getChildren().clear();
 			GradesPane.this.showMenu();
-			GradesPane.this.showGraphLines();
+			GradesPane.this.showHeader();
 			GradesPane.this.showBarGraph();
 		}
 	}
