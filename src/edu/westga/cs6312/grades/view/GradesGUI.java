@@ -20,7 +20,7 @@ import edu.westga.cs6312.grades.model.Grades;
  *
  */
 public class GradesGUI {
-	public Gradebook mainGradebook;
+	private Gradebook mainGradebook;
 	private GradesPane userPane;
 
 	/**
@@ -37,6 +37,15 @@ public class GradesGUI {
 	 */
 	public GradesPane getGradesPane() {
 		return this.userPane;
+	}
+
+	/**
+	 * Getter for Gradebook from the GradesGUI
+	 * 
+	 * @return Gradebook from the GradesGUI
+	 */
+	public Gradebook getGUIGradebook() {
+		return this.mainGradebook;
 	}
 
 	/**
