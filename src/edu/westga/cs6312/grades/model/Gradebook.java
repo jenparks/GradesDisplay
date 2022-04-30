@@ -81,4 +81,74 @@ public class Gradebook {
 		return this.studentGradebook;
 	}
 
+	/**
+	 * Calculates & returns the class average for labs, as a decimal
+	 * 
+	 * @return Class average for labs
+	 */
+	public double getClassAverageLab() {
+		double total = 0;
+		for (Grades element : this.studentGradebook) {
+			total += element.getLabAverage();
+		}
+		double average = total / this.studentGradebook.size();
+		return average;
+	}
+
+	/**
+	 * Calculates & returns the class average for projects, as a decimal
+	 * 
+	 * @return Class average for projects
+	 */
+	public double getClassAverageProject() {
+		double total = 0;
+		for (Grades element : this.studentGradebook) {
+			total += element.getProjectAverage();
+		}
+		double average = total / this.studentGradebook.size();
+		return average;
+	}
+
+	/**
+	 * Calculates & returns the class average for tests, as a decimal
+	 * 
+	 * @return Class average for tests
+	 */
+	public double getClassAverageTest() {
+		double total = 0;
+		for (Grades element : this.studentGradebook) {
+			total += element.getTestAverage();
+		}
+		double average = total / this.studentGradebook.size();
+		return average;
+	}
+
+	/**
+	 * Calculates & returns the class average for straight averages, as a decimal
+	 * 
+	 * @return Class average for straight averages
+	 */
+	public double getClassAverageStraight() {
+		double total = 0;
+		for (Grades element : this.studentGradebook) {
+			total += element.getStraightAverage();
+		}
+		double average = total / this.studentGradebook.size();
+		return average;
+	}
+
+	/**
+	 * Calculates & returns the class average for weighted averages, as a decimal
+	 * 
+	 * @return Class average for weighted averages
+	 */
+	public double getClassAverageWeighted() {
+		double total = 0;
+		for (Grades element : this.studentGradebook) {
+			total += element.getWeightedAverage();
+		}
+		double average = total / this.studentGradebook.size();
+		return average;
+	}
+
 }
