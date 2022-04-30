@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -100,6 +101,9 @@ public class GradesPane extends GridPane {
 		super.add(topMenuBar, 0, 0, 2, 1);
 		menuFileOpen.setOnAction(new OpenFileDialog());
 		menuHelpAbout.setOnAction(new OpenAboutPage());
+		
+		menuFileOpen.setAccelerator(KeyCombination.keyCombination("Ctrl+O"));
+		menuHelpAbout.setAccelerator(KeyCombination.keyCombination("Ctrl+A"));
 	}
 
 	private void showHeader() {
