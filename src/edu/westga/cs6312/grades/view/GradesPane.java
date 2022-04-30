@@ -284,6 +284,7 @@ public class GradesPane extends GridPane {
 				studentAddErrorAlert.show();
 			}
 			GradesPane.super.getChildren().clear();
+			GradesPane.this.studentGrades.sortGradebook();
 			GradesPane.this.showMenu();
 			GradesPane.this.drawAllGraphParts();
 		}

@@ -277,9 +277,9 @@ public class Grades implements Comparable<Grades> {
 		if (this.lastName.equals(comparedGrades.lastName) && this.firstName.equals(comparedGrades.firstName)) {
 			return 0;
 		} else if (this.lastName.equals(comparedGrades.lastName)
-				&& this.firstName.compareTo(comparedGrades.firstName) == 1) {
+				&& this.firstName.compareTo(comparedGrades.firstName) >= 1) {
 			return 1;
-		} else if (this.lastName.compareTo(comparedGrades.lastName) == 1) {
+		} else if (this.lastName.compareTo(comparedGrades.lastName) >= 1) {
 			return 1;
 		} else {
 			return -1;

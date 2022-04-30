@@ -33,7 +33,7 @@ public class GradesWhenSorting {
 		testGrades1.setLastName("Smith");
 
 		int result = testGrades1.compareTo(testGrades2);
-		assertEquals(-1, result);
+		assertEquals(1, result);
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class GradesWhenSorting {
 		testGrades1.setLastName("Smith");
 
 		int result = testGrades1.compareTo(testGrades2);
-		assertEquals(-1, result);
+		assertEquals(1, result);
 	}
 
 }
