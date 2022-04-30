@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @version Apr 25, 2022
  *
  */
-public class Grades {
+public class Grades implements Comparable<Grades> {
 	private String studentID;
 	private String firstName;
 	private String lastName;
@@ -268,4 +268,22 @@ public class Grades {
 		average = (double) mathAverage / 1000;
 		return average;
 	}
+
+	/**
+	 * Uses Comparable interface, overrides compareTo() method
+	 */
+	@Override
+	public int compareTo(Grades comparedGrades) {
+		if (this.lastName.equals(comparedGrades.lastName) && this.firstName.equals(comparedGrades.firstName)) {
+			return 0;
+		} else if (this.lastName.equals(comparedGrades.lastName)
+				&& this.firstName.compareTo(comparedGrades.firstName) == 1) {
+			return 1;
+		} else if (this.lastName.compareTo(comparedGrades.lastName) == 1) {
+			return 1;
+		} else {
+			return -1;
+		}
+	}
+
 }
