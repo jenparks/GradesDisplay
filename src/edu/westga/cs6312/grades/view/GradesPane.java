@@ -10,6 +10,7 @@ import edu.westga.cs6312.grades.model.Gradebook;
 import edu.westga.cs6312.grades.model.Grades;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -60,21 +61,27 @@ public class GradesPane extends GridPane {
 		this.selectedGradesIndex = 0;
 		this.userGUI = theGUI;
 		super.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-		super.setPrefSize(550, 600);
+		super.setPrefSize(550, 550);
 		super.setVgap(10);
 		super.setHgap(35);
 		super.setAlignment(Pos.TOP_CENTER);
 
 		this.showMenu();
 		if (newGrades != null) {
-			this.showHeader();
-			this.showBarGraph();
-			this.showBarGraphLabels();
+			this.drawAllGraphParts();
 		} else {
 			Label noFileSelected = new Label("Please select a file");
 			noFileSelected.setFont(new Font(20));
 			super.add(noFileSelected, 1, 1);
 		}
+	}
+
+	private void drawAllGraphParts() {
+		this.showAverageLines();
+		this.showHeader();
+		this.showBarGraph();
+		this.showAverageLinesLabels();
+		this.showBarGraphLabels();
 	}
 
 	private void showMenu() {
@@ -113,13 +120,13 @@ public class GradesPane extends GridPane {
 		for (int count = 0; count < 11; count++) {
 			Rectangle innerLines = new Rectangle();
 			innerLines.widthProperty().bind(super.widthProperty().multiply(count * .09));
-			innerLines.setHeight(350);
+			innerLines.setHeight(300);
 			innerLines.setFill(Color.TRANSPARENT);
 			innerLines.setStroke(Color.GRAY);
-			super.add(innerLines, 0, 3, 2, 1);
+			super.add(innerLines, 0, 3, 3, 1);
 			Label lineNames = new Label(count * 10 + "%");
 			lineNames.translateXProperty().bind(super.widthProperty().multiply(count * .09));
-			super.add(lineNames, 0, 4, 2, 1);
+			super.add(lineNames, 0, 4, 3, 1);
 		}
 	}
 
@@ -135,10 +142,14 @@ public class GradesPane extends GridPane {
 		Label weightedAverageLabel = new Label(
 				"Weighted Avg: " + String.format("%.01f", currentStudent.getWeightedAverage() * 100));
 		labAverageLabel.setBackground(new Background(new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY)));
-		projectAverageLabel.setBackground(new Background(new BackgroundFill(Color.GOLD, CornerRadii.EMPTY, Insets.EMPTY)));
-		testAverageLabel.setBackground(new Background(new BackgroundFill(Color.GREENYELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
-		straightAverageLabel.setBackground(new Background(new BackgroundFill(Color.POWDERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-		weightedAverageLabel.setBackground(new Background(new BackgroundFill(Color.LAVENDER, CornerRadii.EMPTY, Insets.EMPTY)));
+		projectAverageLabel
+				.setBackground(new Background(new BackgroundFill(Color.GOLD, CornerRadii.EMPTY, Insets.EMPTY)));
+		testAverageLabel
+				.setBackground(new Background(new BackgroundFill(Color.GREENYELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
+		straightAverageLabel
+				.setBackground(new Background(new BackgroundFill(Color.POWDERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		weightedAverageLabel
+				.setBackground(new Background(new BackgroundFill(Color.LAVENDER, CornerRadii.EMPTY, Insets.EMPTY)));
 
 		VBox barLabels = new VBox(43);
 		barLabels.setPadding(new Insets(15, 0, 0, 0));
@@ -175,11 +186,73 @@ public class GradesPane extends GridPane {
 
 		VBox barGraph = new VBox(10);
 		barGraph.getChildren().addAll(labAverage, projectAverage, testAverage, straightAverage, weightedAverage);
-		super.add(barGraph, 0, 3, 2, 1);
+		super.add(barGraph, 0, 3, 3, 1);
 	}
-	
+
 	private void showAverageLines() {
-		
+		Rectangle classLabAverageLine = new Rectangle(0, 300);
+		classLabAverageLine.widthProperty()
+				.bind(super.widthProperty().multiply(this.studentGrades.getClassAverageLab()).multiply(.9));
+		classLabAverageLine.setFill(Color.TRANSPARENT);
+		classLabAverageLine.setStroke(Color.RED);
+		super.add(classLabAverageLine, 0, 3, 3, 1);
+
+		Rectangle classProjectAverageLine = new Rectangle(0, 300);
+		classProjectAverageLine.widthProperty()
+				.bind(super.widthProperty().multiply(this.studentGrades.getClassAverageProject()).multiply(.9));
+		classProjectAverageLine.setFill(Color.TRANSPARENT);
+		classProjectAverageLine.setStroke(Color.ORANGE);
+		super.add(classProjectAverageLine, 0, 3, 3, 1);
+
+		Rectangle classTestAverageLine = new Rectangle(0, 300);
+		classTestAverageLine.widthProperty()
+				.bind(super.widthProperty().multiply(this.studentGrades.getClassAverageTest()).multiply(.9));
+		classTestAverageLine.setFill(Color.TRANSPARENT);
+		classTestAverageLine.setStroke(Color.GREEN);
+		super.add(classTestAverageLine, 0, 3, 3, 1);
+
+		Rectangle classStraightAverageLine = new Rectangle(0, 300);
+		classStraightAverageLine.widthProperty()
+				.bind(super.widthProperty().multiply(this.studentGrades.getClassAverageStraight()).multiply(.9));
+		classStraightAverageLine.setFill(Color.TRANSPARENT);
+		classStraightAverageLine.setStroke(Color.BLUE);
+		super.add(classStraightAverageLine, 0, 3, 3, 1);
+
+		Rectangle classWeightedAverageLine = new Rectangle(0, 300);
+		classWeightedAverageLine.widthProperty()
+				.bind(super.widthProperty().multiply(this.studentGrades.getClassAverageWeighted()).multiply(.9));
+		classWeightedAverageLine.setFill(Color.TRANSPARENT);
+		classWeightedAverageLine.setStroke(Color.PURPLE);
+		super.add(classWeightedAverageLine, 0, 3, 3, 1);
+	}
+
+	private void showAverageLinesLabels() {
+		Label labAverageLabel = new Label(
+				"Class Avg: " + String.format("%.01f", this.studentGrades.getClassAverageLab() * 100));
+		Label projectAverageLabel = new Label(
+				"Class Project: " + String.format("%.01f", this.studentGrades.getClassAverageProject() * 100));
+		Label testAverageLabel = new Label(
+				"Class Test: " + String.format("%.01f", this.studentGrades.getClassAverageTest() * 100));
+		Label straightAverageLabel = new Label(
+				"Class Straight: " + String.format("%.01f", this.studentGrades.getClassAverageStraight() * 100));
+		Label weightedAverageLabel = new Label(
+				"Class Weighted: " + String.format("%.01f", this.studentGrades.getClassAverageWeighted() * 100));
+		labAverageLabel.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		projectAverageLabel
+				.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		testAverageLabel
+				.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		straightAverageLabel
+				.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		weightedAverageLabel
+				.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+
+		VBox lineLabels = new VBox(43);
+		lineLabels.setPadding(new Insets(15, 0, 0, 0));
+		lineLabels.getChildren().addAll(labAverageLabel, projectAverageLabel, testAverageLabel, straightAverageLabel,
+				weightedAverageLabel);
+		super.setHalignment(lineLabels, HPos.RIGHT);
+		super.add(lineLabels, 2, 3);
 	}
 
 	/**
@@ -208,9 +281,7 @@ public class GradesPane extends GridPane {
 			}
 			GradesPane.super.getChildren().clear();
 			GradesPane.this.showMenu();
-			GradesPane.this.showHeader();
-			GradesPane.this.showBarGraph();
-			GradesPane.this.showBarGraphLabels();
+			GradesPane.this.drawAllGraphParts();
 		}
 	}
 
@@ -238,9 +309,7 @@ public class GradesPane extends GridPane {
 			GradesPane.this.selectedGradesIndex = GradesPane.this.textCombo.getItems().indexOf(menuResult);
 			GradesPane.super.getChildren().clear();
 			GradesPane.this.showMenu();
-			GradesPane.this.showHeader();
-			GradesPane.this.showBarGraph();
-			GradesPane.this.showBarGraphLabels();
+			GradesPane.this.drawAllGraphParts();
 		}
 	}
 
