@@ -6,8 +6,6 @@ package edu.westga.cs6312.grades.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs6312.grades.model.Gradebook;

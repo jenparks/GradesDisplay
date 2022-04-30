@@ -14,7 +14,7 @@ import edu.westga.cs6312.grades.model.Gradebook;
 import edu.westga.cs6312.grades.model.Grades;
 
 /**
- * Creates JUnit test cases for Grades class
+ * Creates JUnit test cases for Gradebook class
  * 
  * @author Jennifer Parks
  * @version Apr 26, 2022
