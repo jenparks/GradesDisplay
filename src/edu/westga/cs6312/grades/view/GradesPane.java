@@ -99,7 +99,7 @@ public class GradesPane extends GridPane {
 		helpMenu.getItems().add(menuHelpAbout);
 
 		MenuBar topMenuBar = new MenuBar();
-		topMenuBar.setMinWidth(530);
+		topMenuBar.setMinWidth(630);
 		topMenuBar.getMenus().add(fileMenu);
 		topMenuBar.getMenus().add(helpMenu);
 		super.add(topMenuBar, 0, 0, 2, 1);
