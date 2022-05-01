@@ -32,7 +32,7 @@ public class GradebookWhenClassAverages {
 		addGradesTotal.setGradesLab(100.0);
 		addGradesTotal.setGradesLab(100.0);
 		testGradebook.addToPotentialPoints(addGradesTotal);
-		
+
 		Grades addGrades1 = new Grades();
 		addGrades1.setGradesLab(50.0);
 		addGrades1.setGradesLab(50.0);
@@ -46,7 +46,7 @@ public class GradebookWhenClassAverages {
 		addGrades2.setGradesLab(60.0);
 		addGrades2.setGradesLab(60.0);
 		testGradebook.addToGradebook(addGrades2);
-		
+
 		double result = testGradebook.getClassAverageLab();
 		assertEquals(0.55, result);
 	}
@@ -63,7 +63,7 @@ public class GradebookWhenClassAverages {
 		addGradesTotal.setGradesProject(100.0);
 		addGradesTotal.setGradesProject(100.0);
 		testGradebook.addToPotentialPoints(addGradesTotal);
-		
+
 		Grades addGrades1 = new Grades();
 		addGrades1.setGradesProject(50.0);
 		addGrades1.setGradesProject(100.0);
@@ -77,7 +77,7 @@ public class GradebookWhenClassAverages {
 		addGrades2.setGradesProject(100.0);
 		addGrades2.setGradesProject(90.0);
 		testGradebook.addToGradebook(addGrades2);
-		
+
 		double result = testGradebook.getClassAverageProject();
 		assertEquals(0.75, result);
 	}
@@ -94,7 +94,7 @@ public class GradebookWhenClassAverages {
 		addGradesTotal.setGradesTest(100.0);
 		addGradesTotal.setGradesTest(100.0);
 		testGradebook.addToPotentialPoints(addGradesTotal);
-		
+
 		Grades addGrades1 = new Grades();
 		addGrades1.setGradesTest(50.0);
 		addGrades1.setGradesTest(50.0);
@@ -108,11 +108,11 @@ public class GradebookWhenClassAverages {
 		addGrades2.setGradesTest(60.0);
 		addGrades2.setGradesTest(60.0);
 		testGradebook.addToGradebook(addGrades2);
-		
+
 		double result = testGradebook.getClassAverageTest();
 		assertEquals(0.725, result);
 	}
-	
+
 	/**
 	 * Tests getting class average for straight averages
 	 */
@@ -129,7 +129,7 @@ public class GradebookWhenClassAverages {
 		addGradesTotal.setGradesProject(100.0);
 		addGradesTotal.setGradesTest(100.0);
 		testGradebook.addToPotentialPoints(addGradesTotal);
-		
+
 		Grades addGrades1 = new Grades();
 		addGrades1.setGradesLab(50.0);
 		addGrades1.setGradesLab(50.0);
@@ -137,7 +137,7 @@ public class GradebookWhenClassAverages {
 		addGrades1.setGradesLab(80.0);
 		addGrades1.setGradesProject(50.0);
 		addGrades1.setGradesProject(100.0);
-		addGrades1.setGradesProject(60.0);
+		addGrades1.setGradesProject(100.0);
 		addGrades1.setGradesTest(50.0);
 		testGradebook.addToGradebook(addGrades1);
 
@@ -151,9 +151,9 @@ public class GradebookWhenClassAverages {
 		addGrades2.setGradesProject(100.0);
 		addGrades2.setGradesTest(90.0);
 		testGradebook.addToGradebook(addGrades2);
-		
+
 		double result = testGradebook.getClassAverageStraight();
-		assertEquals(0.61875, result);
+		assertEquals(0.64375, result);
 	}
 
 	/**
@@ -172,7 +172,7 @@ public class GradebookWhenClassAverages {
 		addGradesTotal.setGradesProject(100.0);
 		addGradesTotal.setGradesTest(100.0);
 		testGradebook.addToPotentialPoints(addGradesTotal);
-		
+
 		Grades addGrades1 = new Grades();
 		addGrades1.setGradesLab(50.0);
 		addGrades1.setGradesLab(50.0);
@@ -180,7 +180,7 @@ public class GradebookWhenClassAverages {
 		addGrades1.setGradesLab(80.0);
 		addGrades1.setGradesProject(50.0);
 		addGrades1.setGradesProject(100.0);
-		addGrades1.setGradesProject(60.0);
+		addGrades1.setGradesProject(100.0);
 		addGrades1.setGradesTest(50.0);
 		testGradebook.addToGradebook(addGrades1);
 
@@ -192,11 +192,11 @@ public class GradebookWhenClassAverages {
 		addGrades2.setGradesProject(50.0);
 		addGrades2.setGradesProject(50.0);
 		addGrades2.setGradesProject(100.0);
-		addGrades2.setGradesTest(100.0);
+		addGrades2.setGradesTest(90.0);
 		testGradebook.addToGradebook(addGrades2);
-		
+
 		double result = testGradebook.getClassAverageWeighted();
-		assertEquals(0.6865, result);
+		assertEquals(0.6875, result);
 	}
 
 }
