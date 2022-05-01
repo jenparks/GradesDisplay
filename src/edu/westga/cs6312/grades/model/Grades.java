@@ -257,15 +257,12 @@ public class Grades implements Comparable<Grades> {
 	}
 
 	/**
-	 * Calculates weighted average (also tries to account for java floating point
-	 * issues)
+	 * Calculates weighted average
 	 * 
 	 * @return Weighted average
 	 */
 	public double getWeightedAverage() {
 		double average = 0.20 * this.getLabAverage() + 0.35 * this.getProjectAverage() + 0.45 * this.getTestAverage();
-		int mathAverage = (int) (average * 1000);
-		average = (double) mathAverage / 1000;
 		return average;
 	}
 

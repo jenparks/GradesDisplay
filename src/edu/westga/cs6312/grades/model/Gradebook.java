@@ -30,14 +30,14 @@ public class Gradebook {
 	 * Sets a Grades object as the maximum value of potential points for all graded
 	 * elements
 	 * 
-	 * @param newGrades Grades object to set as maximum potential points
+	 * @param newTotalGrades Grades object to set as maximum potential points
 	 * @precondition Grades cannot be null
 	 */
-	public void addToPotentialPoints(Grades newGrades) {
-		if (newGrades == null) {
+	public void addToPotentialPoints(Grades newTotalGrades) {
+		if (newTotalGrades == null) {
 			throw new IllegalArgumentException("Cannot add null grades");
 		}
-		this.potentialPoints = newGrades;
+		this.potentialPoints = newTotalGrades;
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class Gradebook {
 				|| newGrades.getGradesProject().size() != this.potentialPoints.getGradesProject().size()
 				|| newGrades.getGradesTest().size() != this.potentialPoints.getGradesTest().size()) {
 			throw new IllegalArgumentException(
-					"Number of graded items for Student is different than for Total Points\nStudent not added");
+					"Number of graded items for Student is different than for Total Points - Student not added");
 		} else {
 			newGrades.setTotalPoints(this.potentialPoints);
 			this.studentGradebook.add(newGrades);
@@ -153,7 +153,7 @@ public class Gradebook {
 	}
 
 	/**
-	 * Sorts Grades in the Gradebook, by last then first name
+	 * Sorts Grades (students) in the Gradebook, by last then first name
 	 */
 	public void sortGradebook() {
 		Collections.sort(this.studentGradebook);

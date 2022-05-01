@@ -51,16 +51,16 @@ public class GradesPane extends GridPane {
 	 * 2-parameter constructor, creates object
 	 * 
 	 * @param newGrades Grades object to be used to draw graph
-	 * @param theGUI    The GradesGUI
+	 * @param mainGUI   The GradesGUI
 	 * @precondition Grades cannot be null
 	 */
-	public GradesPane(Gradebook newGrades, GradesGUI theGUI) {
-		if (theGUI == null) {
+	public GradesPane(Gradebook newGrades, GradesGUI mainGUI) {
+		if (mainGUI == null) {
 			throw new IllegalArgumentException("Cannot create graph from null data set");
 		}
 		this.studentGrades = newGrades;
 		this.selectedGradesIndex = 0;
-		this.userGUI = theGUI;
+		this.userGUI = mainGUI;
 		super.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		super.setPrefSize(550, 550);
 		super.setVgap(10);
@@ -68,12 +68,12 @@ public class GradesPane extends GridPane {
 		super.setAlignment(Pos.TOP_CENTER);
 
 		this.showMenu();
-		if (newGrades != null) {
-			this.drawAllGraphParts();
-		} else {
+		if (newGrades == null) {
 			Label noFileSelected = new Label("Please select a file");
 			noFileSelected.setFont(new Font(20));
 			super.add(noFileSelected, 1, 1);
+		} else {
+			this.drawAllGraphParts();
 		}
 	}
 
@@ -105,7 +105,7 @@ public class GradesPane extends GridPane {
 		super.add(topMenuBar, 0, 0, 2, 1);
 		menuFileOpen.setOnAction(new OpenFileDialog());
 		menuHelpAbout.setOnAction(new OpenAboutPage());
-		
+
 		menuFileOpen.setAccelerator(KeyCombination.keyCombination("Ctrl+O"));
 		menuHelpAbout.setAccelerator(KeyCombination.keyCombination("Ctrl+A"));
 	}
@@ -275,22 +275,29 @@ public class GradesPane extends GridPane {
 	private class OpenFileDialog implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent event) {
-			FileChooser fileChooser = new FileChooser();
-			fileChooser.setTitle("Open New File");
-			GradesPane.this.userDataFile = fileChooser.showOpenDialog(new Stage());
-			GradesPane.this.userGUI.readData(GradesPane.this.userDataFile);
-			GradesPane.this.studentGrades = GradesPane.this.userGUI.getGUIGradebook();
-			if (GradesPane.this.userGUI.getStudentAddStatus()) {
-				Alert studentAddErrorAlert = new Alert(AlertType.ERROR);
-				studentAddErrorAlert.setTitle("Error Adding Student");
-				studentAddErrorAlert.setHeaderText("Error Adding One Or More Students");
-				studentAddErrorAlert.setContentText("Check your data file and try again");
-				studentAddErrorAlert.show();
+			try {
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Open New File");
+				GradesPane.this.userDataFile = fileChooser.showOpenDialog(new Stage());
+				GradesPane.this.userGUI.readData(GradesPane.this.userDataFile);
+				GradesPane.this.studentGrades = GradesPane.this.userGUI.getGUIGradebook();
+				if (GradesPane.this.userGUI.getStudentAddStatus()) {
+					Alert studentAddErrorAlert = new Alert(AlertType.ERROR);
+					studentAddErrorAlert.setTitle("Error Adding Student");
+					studentAddErrorAlert.setHeaderText("Error Adding One Or More Students");
+					studentAddErrorAlert.setContentText("Check your data file and try again");
+					studentAddErrorAlert.show();
+				}
+				GradesPane.super.getChildren().clear();
+				GradesPane.this.studentGrades.sortGradebook();
+				GradesPane.this.showMenu();
+				GradesPane.this.drawAllGraphParts();
+			} catch (NullPointerException ex) {
+				Alert fileErrorAlert = new Alert(AlertType.ERROR);
+				fileErrorAlert.setTitle("Error Selecting File");
+				fileErrorAlert.setHeaderText("File is null, try again");
+				fileErrorAlert.show();
 			}
-			GradesPane.super.getChildren().clear();
-			GradesPane.this.studentGrades.sortGradebook();
-			GradesPane.this.showMenu();
-			GradesPane.this.drawAllGraphParts();
 		}
 	}
 
