@@ -108,7 +108,7 @@ public class Grades implements Comparable<Grades> {
 	 */
 	public void setGradesLab(double newGrade) {
 		if (newGrade < 0) {
-			throw new IllegalArgumentException("Added grade must be greater than 0");
+			throw new IllegalArgumentException("Added grade must be >= 0");
 		}
 		this.gradesLab.add(newGrade);
 	}
@@ -130,7 +130,7 @@ public class Grades implements Comparable<Grades> {
 	 */
 	public void setGradesProject(double newGrade) {
 		if (newGrade < 0) {
-			throw new IllegalArgumentException("Added grade must be greater than 0");
+			throw new IllegalArgumentException("Added grade must be >= 0");
 		}
 		this.gradesProject.add(newGrade);
 	}
@@ -152,7 +152,7 @@ public class Grades implements Comparable<Grades> {
 	 */
 	public void setGradesTest(double newGrade) {
 		if (newGrade < 0) {
-			throw new IllegalArgumentException("Added grade must be greater than 0");
+			throw new IllegalArgumentException("Added grade must be >= 0");
 		}
 		this.gradesTest.add(newGrade);
 	}

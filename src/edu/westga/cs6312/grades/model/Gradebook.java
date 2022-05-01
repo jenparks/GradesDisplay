@@ -151,21 +151,12 @@ public class Gradebook {
 		double average = total / this.studentGradebook.size();
 		return average;
 	}
-	
+
 	/**
 	 * Sorts Grades in the Gradebook, by last then first name
 	 */
 	public void sortGradebook() {
-		System.out.println("---");
-		System.out.println("---");
-		for (Grades element : this.studentGradebook) {
-			System.out.println(element.getFirstName() + " " + element.getLastName());
-		}
-		System.out.println("---");
 		Collections.sort(this.studentGradebook);
-		for (Grades element : this.studentGradebook) {
-			System.out.println(element.getFirstName() + " " + element.getLastName());
-		}
 	}
 
 }

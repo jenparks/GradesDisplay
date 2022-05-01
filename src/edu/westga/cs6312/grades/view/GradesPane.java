@@ -88,10 +88,14 @@ public class GradesPane extends GridPane {
 	private void showMenu() {
 		Menu fileMenu = new Menu("_File");
 		MenuItem menuFileOpen = new MenuItem("_Open");
+		fileMenu.setMnemonicParsing(true);
+		menuFileOpen.setMnemonicParsing(true);
 		fileMenu.getItems().add(menuFileOpen);
 
 		Menu helpMenu = new Menu("_Help");
 		MenuItem menuHelpAbout = new MenuItem("_About");
+		helpMenu.setMnemonicParsing(true);
+		menuHelpAbout.setMnemonicParsing(true);
 		helpMenu.getItems().add(menuHelpAbout);
 
 		MenuBar topMenuBar = new MenuBar();
@@ -241,15 +245,15 @@ public class GradesPane extends GridPane {
 				"Class Straight: " + String.format("%.01f", this.studentGrades.getClassAverageStraight() * 100));
 		Label weightedAverageLabel = new Label(
 				"Class Weighted: " + String.format("%.01f", this.studentGrades.getClassAverageWeighted() * 100));
-		labAverageLabel.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		labAverageLabel.setBackground(new Background(new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY)));
 		projectAverageLabel
-				.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+				.setBackground(new Background(new BackgroundFill(Color.GOLD, CornerRadii.EMPTY, Insets.EMPTY)));
 		testAverageLabel
-				.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+				.setBackground(new Background(new BackgroundFill(Color.GREENYELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
 		straightAverageLabel
-				.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+				.setBackground(new Background(new BackgroundFill(Color.POWDERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		weightedAverageLabel
-				.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+				.setBackground(new Background(new BackgroundFill(Color.LAVENDER, CornerRadii.EMPTY, Insets.EMPTY)));
 
 		VBox lineLabels = new VBox(43);
 		lineLabels.setPadding(new Insets(15, 0, 0, 0));
