@@ -277,6 +277,10 @@ public class GradesPane extends GridPane {
 		public void handle(ActionEvent event) {
 			try {
 				FileChooser fileChooser = new FileChooser();
+				FileChooser.ExtensionFilter dataFilterTxt = new FileChooser.ExtensionFilter("Text", "*.txt");
+				FileChooser.ExtensionFilter dataFilterAll = new FileChooser.ExtensionFilter("All", "*.*");
+				fileChooser.getExtensionFilters().add(dataFilterTxt);
+				fileChooser.getExtensionFilters().add(dataFilterAll);
 				fileChooser.setTitle("Open New File");
 				GradesPane.this.userDataFile = fileChooser.showOpenDialog(new Stage());
 				GradesPane.this.userGUI.readData(GradesPane.this.userDataFile);
