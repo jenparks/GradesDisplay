@@ -62,7 +62,7 @@ public class GradesPane extends GridPane {
 		this.selectedGradesIndex = 0;
 		this.userGUI = mainGUI;
 		super.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-		super.setPrefSize(550, 550);
+		super.setPrefSize(700, 550);
 		super.setVgap(10);
 		super.setHgap(35);
 		super.setAlignment(Pos.TOP_CENTER);
@@ -277,8 +277,8 @@ public class GradesPane extends GridPane {
 		public void handle(ActionEvent event) {
 			try {
 				FileChooser fileChooser = new FileChooser();
-				FileChooser.ExtensionFilter dataFilterTxt = new FileChooser.ExtensionFilter("Text", "*.txt");
-				FileChooser.ExtensionFilter dataFilterAll = new FileChooser.ExtensionFilter("All", "*.*");
+				FileChooser.ExtensionFilter dataFilterTxt = new FileChooser.ExtensionFilter("Text Files", "*.txt");
+				FileChooser.ExtensionFilter dataFilterAll = new FileChooser.ExtensionFilter("All Files", "*.*");
 				fileChooser.getExtensionFilters().add(dataFilterTxt);
 				fileChooser.getExtensionFilters().add(dataFilterAll);
 				fileChooser.setTitle("Open New File");
@@ -312,10 +312,14 @@ public class GradesPane extends GridPane {
 			GridPane aboutPane = new GridPane();
 			aboutPane
 					.setBackground(new Background(new BackgroundFill(Color.LAVENDER, CornerRadii.EMPTY, Insets.EMPTY)));
-			aboutPane.setPrefSize(300, 300);
+			aboutPane.setPrefSize(400, 300);
 			aboutPane.setAlignment(Pos.CENTER);
+			Label title = new Label("Gradebook Application 2022");
+			title.setFont(new Font(25));
 			Label myName = new Label("Made by Jennifer Parks\nWith my rubber duck crew");
-			aboutPane.add(myName, 0, 0);
+			myName.setFont(new Font(15));
+			aboutPane.add(title, 0, 0);
+			aboutPane.add(myName, 0, 1);
 			Scene theScene = new Scene(aboutPane);
 			aboutStage.setScene(theScene);
 			aboutStage.show();
